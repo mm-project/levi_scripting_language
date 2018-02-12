@@ -1,31 +1,34 @@
-CFLAGS += -g -std= gnu++0x -static-libstdc++ #-Wall
+CFLAGS += -g -std=gnu++0x -static-libstdc++ #-Wall
 
-levi: value.o stmt.o expr.o scanner.o parser.o interpreter.o environment.o main.o
-	g++ $(CFLAGS) value.o stmt.o expr.o scanner.o parser.o interpreter.o environment.o main.o -o levi
+levi: objroot/value.o objroot/stmt.o objroot/expr.o objroot/scanner.o objroot/parser.o objroot/interpreter.o objroot/environment.o objroot/main.o
+	mkdir -p objroot
+	mkdir -p bin
+	g++ $(CFLAGS) objroot/value.o objroot/stmt.o objroot/expr.o objroot/scanner.o objroot/parser.o objroot/interpreter.o objroot/environment.o objroot/main.o -o bin/levi 
 
-value.o: value.hpp value.cpp
-	g++ value.cpp -c $(CFLAGS) 
+objroot/value.o: src/value.hpp src/value.cpp
+	g++ src/value.cpp -c $(CFLAGS) -o objroot/value.o
 
-expr.o: expr.cpp expr.hpp interpreter.hpp token.hpp value.hpp visitor_interface.hpp
-	g++ expr.cpp -c $(CFLAGS)
+objroot/expr.o: src/expr.cpp src/expr.hpp src/interpreter.hpp src/token.hpp src/value.hpp src/visitor_interface.hpp
+	g++ src/expr.cpp -c $(CFLAGS) -o objroot/expr.o
 
-stmt.o: stmt.cpp stmt.hpp visitor_interface.hpp token.hpp
-	g++ stmt.cpp -c $(CFLAGS)
+objroot/stmt.o: src/stmt.cpp src/stmt.hpp src/visitor_interface.hpp src/token.hpp
+	g++ src/stmt.cpp -c $(CFLAGS) -o objroot/stmt.o
 
-scanner.o: scanner.cpp scanner.hpp token.hpp
-	g++ scanner.cpp -c $(CFLAGS)
+objroot/scanner.o: src/scanner.cpp src/scanner.hpp src/token.hpp
+	g++ src/scanner.cpp -c $(CFLAGS) -o objroot/scanner.o
 
-parser.o: parser.cpp parser.hpp value.hpp error.hpp token.hpp expr.hpp stmt.hpp
-	g++ parser.cpp -c $(CFLAGS)
+objroot/parser.o: src/parser.cpp src/parser.hpp src/value.hpp src/error.hpp src/token.hpp src/expr.hpp src/stmt.hpp
+	g++ src/parser.cpp -c $(CFLAGS) -o objroot/parser.o
 
-environment.o: environment.cpp environment.hpp error.hpp value.hpp token.hpp 
-	g++ environment.cpp -c $(CFLAGS)
+objroot/environment.o: src/environment.cpp src/environment.hpp src/error.hpp src/value.hpp src/token.hpp 
+	g++ src/environment.cpp -c $(CFLAGS) -o objroot/environment.o
 
-interpreter.o: interpreter.cpp interpreter.hpp environment.hpp expr.hpp error.hpp stmt.hpp visitor_interface.hpp value.hpp token.hpp
-	g++ interpreter.cpp -c $(CFLAGS)
+objroot/interpreter.o: src/interpreter.cpp src/interpreter.hpp src/environment.hpp src/expr.hpp src/error.hpp src/stmt.hpp src/visitor_interface.hpp src/value.hpp src/token.hpp
+	g++ src/interpreter.cpp -c $(CFLAGS) -o objroot/interpreter.o
 
-main.o: main.cpp scanner.hpp parser.hpp interpreter.hpp
-	g++ main.cpp -c $(CFLAGS)
+objroot/main.o: src/main.cpp src/scanner.hpp src/parser.hpp src/interpreter.hpp
+	g++ src/main.cpp -c $(CFLAGS) -o objroot/main.o
 
 clean: 
-	rm -r main.o interpreter.o environment.o parser.o scanner.o stmt.o expr.o value.o levi	
+	rm -f objroot/* 
+	rm -f bin/*	
