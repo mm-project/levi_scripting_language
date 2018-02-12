@@ -1,4 +1,4 @@
-CFLAGS += -g -std=gnu++0x -static-libstdc++ #-Wall
+CFLAGS += -g -std= gnu++0x -static-libstdc++ #-Wall
 
 levi: value.o stmt.o expr.o scanner.o parser.o interpreter.o environment.o main.o
 	g++ $(CFLAGS) value.o stmt.o expr.o scanner.o parser.o interpreter.o environment.o main.o -o levi
