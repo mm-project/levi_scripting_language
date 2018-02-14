@@ -11,13 +11,13 @@ script:
   # - ./build_pdf.sh
 
 after_script:
-  - ./test/reg/runRegTests.sh
+  #- ./test/reg/runRegTests.sh
   # - kpsewhich tkz-graph.sty
 
 
 after_success:
-  - echo "success"
+  - ./test/reg/runRegTests.sh
  
 after_failure:
-  - echo "failure"
+  - echo "build failure"
   
