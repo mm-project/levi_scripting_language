@@ -7,6 +7,8 @@ compiler:
   
 script:
   - make
+  - chmod 777 ./test/reg/runRegTests.sh
+  - ./test/reg/runRegTests.sh
   # - kpsewhich tkz-graph.sty
   # - ./build_pdf.sh
 
@@ -16,8 +18,9 @@ after_script:
 
 
 after_success:
-  - chmod 777 ./test/reg/runRegTests.sh
-  - ./test/reg/runRegTests.sh
+  - echo " shat lava "
+  #- chmod 777 ./test/reg/runRegTests.sh
+  #- ./test/reg/runRegTests.sh
  
 after_failure:
   - echo "build failure"
