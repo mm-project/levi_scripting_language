@@ -109,7 +109,8 @@ void Scanner::scan_token()
      		 	} else {
           		add_token(SLASH);
         		} break;
-		case ' ' : break; //skip
+		case ' ' :  //skip
+                case '\t': break;
 		case '"' : string(); break;
 
 		default: if (isdigit(c)) {
