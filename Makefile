@@ -1,8 +1,8 @@
 CFLAGS += -g -std=gnu++0x -static-libstdc++ #-Wall
 
-levi: objroot/value.o objroot/stmt.o objroot/expr.o objroot/scanner.o objroot/parser.o objroot/interpreter.o objroot/environment.o objroot/main.o
-	mkdir -p objroot
-	mkdir -p bin
+
+	
+default: init objroot/value.o objroot/stmt.o objroot/expr.o objroot/scanner.o objroot/parser.o objroot/interpreter.o objroot/environment.o objroot/main.o
 	g++ $(CFLAGS) objroot/value.o objroot/stmt.o objroot/expr.o objroot/scanner.o objroot/parser.o objroot/interpreter.o objroot/environment.o objroot/main.o -o bin/levi 
 
 objroot/value.o: src/value.hpp src/value.cpp
@@ -32,3 +32,10 @@ objroot/main.o: src/main.cpp src/scanner.hpp src/parser.hpp src/interpreter.hpp
 clean: 
 	rm -f objroot/* 
 	rm -f bin/*	
+	
+init:
+	mkdir -p objroot
+	mkdir -p bin
+	
+
+	
