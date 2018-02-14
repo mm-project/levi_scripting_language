@@ -1,0 +1,13 @@
+var a = 9;
+print a;
+if (a == 8) {
+        print "yashik";
+} else {
+	print a;
+	a = 7;
+	if ( a == 6 ) {
+		print "brnavar";
+	
+	print a;
+
+

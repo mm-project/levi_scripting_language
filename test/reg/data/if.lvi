@@ -1,0 +1,10 @@
+var var = 9;
+print var;
+if (a == 8) {
+        print true;
+} else {
+        var i = 1;
+        print i;
+        print false;
+}
+print i;
