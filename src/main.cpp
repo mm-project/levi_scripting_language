@@ -8,6 +8,7 @@
 
 std::string read_file(const std::string& filename)
 {
+        // TODO: fixme
         std::fstream file;
         file.open(filename);
         std::stringstream str_stream;
