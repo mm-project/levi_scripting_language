@@ -16,6 +16,7 @@ after_script:
 
 
 after_success:
+  - chmod 777 ./test/reg/runRegTests.sh
   - ./test/reg/runRegTests.sh
  
 after_failure:
