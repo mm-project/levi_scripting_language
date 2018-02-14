@@ -3,10 +3,10 @@
 mode=$1
 
 #FIXME
-path=/c/Users/levons/Desktop/git/diploma_levibyte/diploma
-out_dir=./reg_output
+path=.
 
-levi_exe=$path/bin/levi.exe
+levi_exe=$path/bin/levi
+out_dir=$path/reg_output
 data_dir=$path/test/reg/data
 golden_dir=$path/test/reg/golden
 
@@ -16,17 +16,32 @@ mkdir -p $out_dir
 for fn in `ls $data_dir`; do
 	testname=`echo $fn| cut -d'.' -f1`
 	echo  -ne "		Running test <$testname> : "
-    $levi_exe $data_dir/$fn > $out_dir/$testname.out
-	if [ "$mode" == "" ]; then
-		result=`diff $golden_dir/$testname.out $out_dir/$testname.out &> /dev/null` 
-		if [ "$?" != 0 ] || [ "$result" != "" ]; then
-			echo "  Fail"
+    
+	a=`$levi_exe $data_dir/$fn &> $out_dir/$testname.out` 
+	exit_status=$?
+	#echo "$exit_status"
+	#continue
+	if [ "$exit_status" != "0" ]; then
+		echo "	CRASH (exit status $exit_status )"
+		continue
+	else
+		if [ "$mode" == "" ]; then
+			if [ ! -f $golden_dir/$testname.golden ];then
+				echo "	ERROR - NO GOLDEN"
+				continue
+			fi
+			result=`diff $out_dir/$testname.out  $golden_dir/$testname.golden &> /dev/null` 
+			if [ "$?" != 0 ] || [ "$result" != "" ]; then
+				echo "	Fail"
+			else
+				echo  "	Pass"
+			fi
+		elif [ "$mode" == "regolden" ]; then
+			echo "	Regolened"
+			cp $out_dir/$testname.out $golden_dir/$testname.golden
 		else
-			echo  "	Pass "
-		
+			echo "DUMMY!"
 		fi
-	elif [ "$mode" == "regolden" ]; then
-		cp $out_dir/$testname.out $golden_dir/$testname.out
 	fi
 done
 
