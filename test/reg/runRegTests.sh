@@ -62,8 +62,8 @@ echo "*************************** REGRESSION TEST RESULTS ********************"
 echo "Total:  $total"
 echo
 echo "Pass:   $passed"
-echo "Fail:   $fails"
-echo "Fatals: $fatal_fails"
+echo "Fail:   $fails    [ Fatal: $fatal_fails ]"
+#echo "Fatals: $fatal_fails"
 echo
 
 
