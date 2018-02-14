@@ -1,0 +1,23 @@
+# Enable C++ support
+language: cpp
+
+# Compiler selection
+compiler:
+  - g++
+  
+script:
+  - make
+  # - kpsewhich tkz-graph.sty
+  # - ./build_pdf.sh
+
+after_script:
+  - ./test/reg/runRegTests.sh
+  # - kpsewhich tkz-graph.sty
+
+
+after_success:
+  - echo "success"
+ 
+after_failure:
+  - echo "failure"
+  
