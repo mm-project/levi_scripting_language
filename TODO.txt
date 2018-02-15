@@ -1,0 +1,7 @@
+1. rewrite Makefile
+2. make hidden objroot and deps directory
+3. create external folder for external tools or dependencies
+4. create utils directory for runTests and runCoverage
+5. make wrapper runTests running unit test and reg tests.
+6. runCoverage scirpt
+7. add make rule for coverage instrumentation

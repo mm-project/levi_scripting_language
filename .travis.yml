@@ -1,0 +1,27 @@
+# Enable C++ support
+language: cpp
+
+# Compiler selection
+compiler:
+  - g++
+  
+script:
+  - make
+  - chmod 777 ./test/reg/runRegTests.sh
+  - ./test/reg/runRegTests.sh
+  # - kpsewhich tkz-graph.sty
+  # - ./build_pdf.sh
+
+after_script:
+  #- ./test/reg/runRegTests.sh
+  # - kpsewhich tkz-graph.sty
+
+
+after_success:
+  - echo " shat lava "
+  #- chmod 777 ./test/reg/runRegTests.sh
+  #- ./test/reg/runRegTests.sh
+ 
+after_failure:
+  - echo "build failure"
+  
