@@ -26,3 +26,8 @@ void IfStmt::accept(StmtVisitor* v)
 {
         v->visitIfStmt(this);
 }
+
+void WhileStmt::accept(StmtVisitor* v)
+{
+        v->visitWhileStmt(this);
+}

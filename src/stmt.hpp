@@ -72,7 +72,8 @@ class IfStmt : public Stmt
 public:
         friend class Interpreter;
 
-        IfStmt(Expr* c, Stmt* b, Stmt* e) : m_condition(c),
+        IfStmt(Expr* c, Stmt* b, Stmt* e)
+                : m_condition(c),
                 m_then_branch(b),
                 m_else_branch(e) {}
 
@@ -83,4 +84,21 @@ private:
         Stmt* m_then_branch;
         Stmt* m_else_branch;
 };
+
+class WhileStmt : public Stmt
+{
+public:
+        friend class Interpreter;
+
+        WhileStmt(Expr* c, Stmt* b)
+                : m_condition(c),
+                m_body(b) {}
+
+        virtual void accept(StmtVisitor*);
+
+private:
+        Expr* m_condition;
+        Stmt* m_body;
+};
+
 #endif

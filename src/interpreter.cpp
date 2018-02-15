@@ -131,7 +131,7 @@ void Interpreter::Interpret(std::vector<Stmt*> stmt)
 {
         try {
                 m_exception_happend = false;
-                for (int i = 0; i < stmt.size(); ++i) {
+                for (unsigned i = 0; i < stmt.size(); ++i) {
                         if (m_exception_happend) {
                                 break;
                         }
@@ -182,20 +182,19 @@ void Interpreter::visitVarStmt(VarStmt* s)
         }
 }
 
-Value Interpreter::visitVariableExpr(VariableExpr* e)
+void Interpreter::visitVariableExpr(VariableExpr* e)
 {
         //enviromant lookup variable
         try {
                 m_value = m_environment->get_variable(e->m_name.lexeme);
-                return m_value;
         } catch (Runtime_error& e) {
+                m_value = "";
                 m_exception_happend = true;
                 std::cout << e.what() << std::endl;
         }
-        return Value();
 }
 
-Value Interpreter::visitAssignExpr(AssignExpr* e)
+void Interpreter::visitAssignExpr(AssignExpr* e)
 {
         Value value = evaluate(e->m_value);
         try {
@@ -204,7 +203,6 @@ Value Interpreter::visitAssignExpr(AssignExpr* e)
         } catch (Runtime_error& e) {
                 std::cout << e.what() << std::endl;
         }
-        return value;
 }
 
 void Interpreter::visitBlockStmt(BlockStmt* s)
@@ -238,5 +236,29 @@ void Interpreter::visitIfStmt(IfStmt* s)
                 execute(s->m_then_branch);
         } else if (s->m_else_branch != 0) {
                 execute(s->m_else_branch);
+        }
+}
+
+void Interpreter::visitLogicalExpr(LogicalExpr* e)
+{
+        Value left = evaluate(e->m_left);
+
+        if (e->m_operator.type == OR) {
+                if (left.is_truthy()) {
+                        m_value = left;
+                }
+        } else if (!left.is_truthy()) {
+                        m_value = left;
+        }
+        Value right = evaluate(e->m_right);
+        m_value = right;
+}
+
+void Interpreter::visitWhileStmt(WhileStmt* s)
+{
+        Value v = evaluate(s->m_condition);
+        while (v.is_truthy()) {
+                execute(s->m_body);
+                v = evaluate(s->m_condition);
         }
 }
