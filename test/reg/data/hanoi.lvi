@@ -1,0 +1,16 @@
+function Hanoi(var m, var a, var b, var c){
+  moves++;
+  if(m == 1){
+   print << m << " from " << a << " to " << c << endl;
+  }else{  
+    Hanoi(m-1, a,c,b);
+    cout << "Move disc " << m << " from " << a << " to " << c << endl;
+    Hanoi(m-1,b,a,c);
+  }
+}
+
+function main(){
+  var discs = 4;
+  var result = Hanoi(discs, 'A', 'B', 'C');
+  print result;
+}
