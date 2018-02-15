@@ -15,6 +15,7 @@ public:
 class Binary : public Expr {
 public:
 	friend class Interpreter;
+
 	Binary(Expr* l, Token o, Expr* r) : m_left(l), m_operator(o), m_right(r) {}
 
 	virtual void accept(ExprVisitor*);
@@ -28,6 +29,7 @@ private:
 class Literal : public Expr {
 public:
 	friend class Interpreter;
+
 	Literal(Value l): m_literal(l) {}
 
 	virtual void accept(ExprVisitor*);
@@ -39,6 +41,7 @@ private:
 class Grouping : public Expr {
 public:
 	friend class Interpreter;
+
 	Grouping(Expr* g): m_grouping(g) {}
 
 	virtual void accept(ExprVisitor*);
@@ -50,6 +53,7 @@ private :
 class Unary : public Expr {
 public:
 	friend class Interpreter;
+
 	Unary(Token o, Expr* r): m_operator(o), m_right(r)  {}
 
 	virtual void accept(ExprVisitor*);
@@ -85,6 +89,22 @@ public:
 private:
         Token m_name;
         Expr* m_value;
+};
+
+class LogicalExpr : public Expr
+{
+public:
+        friend class Interpreter;
+
+        LogicalExpr(Expr* left, Token op, Expr* right)
+                : m_left(left), m_operator(op), m_right(right) {}
+
+        virtual void accept(ExprVisitor*);
+
+private:
+        Expr* m_left;
+        Token m_operator;
+        Expr* m_right;
 };
 
 #endif

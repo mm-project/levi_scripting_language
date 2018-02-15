@@ -67,6 +67,14 @@ void Scanner::identifier()
                 tokens.push_back(Token(IF, text, line));
         } else if (text == "else") {
                 tokens.push_back(Token(ELSE, text, line));
+        } else if (text == "or") {
+                tokens.push_back(Token(OR, text, line));
+        } else if (text == "and") {
+                tokens.push_back(Token(AND, text, line));
+        } else if (text == "while") {
+                tokens.push_back(Token(WHILE, text, line));
+        } else if (text == "for") {
+                tokens.push_back(Token(FOR, text, line));
         } else {
                 tokens.push_back(Token(IDENTIFIER,text, line) );
         }
@@ -111,6 +119,7 @@ void Scanner::scan_token()
         		} break;
 		case ' ' :  //skip
                 case '\t': break;
+
 		case '"' : string(); break;
 
 		default: if (isdigit(c)) {

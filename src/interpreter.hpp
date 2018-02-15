@@ -9,13 +9,7 @@
 #include "value.hpp"
 #include "token.hpp"
 
-class Expr;
-class Binary;
-class Literal;
-class Unary;
-class Grouping;
 class Stmt;
-
 class Environment;
 
 class Interpreter : public ExprVisitor, public StmtVisitor
@@ -27,20 +21,22 @@ public:
 
         std::string interpreter(Expr*);
 
-        void visitBinary(Binary*);
-        void visitLiteral(Literal*);
-	void visitGrouping(Grouping*);
-	void visitUnary(Unary*);
-        Value visitVariableExpr(VariableExpr*);
-        Value visitAssignExpr(AssignExpr*);
+        virtual void visitBinary(Binary*);
+        virtual void visitLiteral(Literal*);
+	virtual void visitGrouping(Grouping*);
+	virtual void visitUnary(Unary*);
+        virtual void visitVariableExpr(VariableExpr*);
+        virtual void visitAssignExpr(AssignExpr*);
+        virtual void visitLogicalExpr(LogicalExpr*);
 
         void execute(Stmt*);
 
-        void visitExpressionStmt(ExpressionStmt*);
-        void visitPrintStmt(PrintStmt*);
-        void visitVarStmt(VarStmt*);
-        void visitBlockStmt(BlockStmt*);
-        void visitIfStmt(IfStmt*);
+        virtual void visitExpressionStmt(ExpressionStmt*);
+        virtual void visitPrintStmt(PrintStmt*);
+        virtual void visitVarStmt(VarStmt*);
+        virtual void visitBlockStmt(BlockStmt*);
+        virtual void visitIfStmt(IfStmt*);
+        virtual void visitWhileStmt(WhileStmt*);
 
 private:
 

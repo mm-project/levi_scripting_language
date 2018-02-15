@@ -23,6 +23,10 @@ private:
 	Expr* unary();
 	Expr* primary();
 
+        Expr* _or();
+        Expr* _and();
+
+
         std::vector<Stmt*> block();
         Stmt* declaration();
         Stmt* statement();
@@ -30,6 +34,8 @@ private:
         Stmt* expressionStmt();
         Stmt* varDeclaration();
         Stmt* ifStmt();
+        Stmt* whileStatement();
+        Stmt* forStatement();
 
 	bool match(Token_type type = EOF_, Token_type type2 = EOF_, Token_type type3 = EOF_, Token_type type4 = EOF_);
 	bool check(Token_type);

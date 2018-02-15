@@ -32,3 +32,8 @@ void AssignExpr::accept(ExprVisitor* v)
 {
         v->visitAssignExpr(this);
 }
+
+void LogicalExpr::accept(ExprVisitor* v)
+{
+        v->visitLogicalExpr(this);
+}

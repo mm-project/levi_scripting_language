@@ -60,7 +60,7 @@ bool Parser::match(Token_type type, Token_type type2, Token_type type3, Token_ty
 
 Expr* Parser::assignment()
 {
-        Expr* expr = equality();
+        Expr* expr = _or();
 
         if (match(EQUAL)) {
                 Token eq = previous();
@@ -200,7 +200,11 @@ Stmt* Parser::statement()
 {
         if (match(IF)) return ifStmt();
 
+        if (match(FOR)) return forStatement();
+
         if (match(PRINT)) return printStmt();
+
+        if (match(WHILE)) return whileStatement();
 
         if (match(LEFT_BRACE)) return new BlockStmt(block());
 
@@ -269,4 +273,79 @@ Stmt* Parser::ifStmt()
         }
 
         return new IfStmt(condition, then_branch, else_branch);
+}
+
+Expr* Parser::_or()
+{
+        Expr* e = _and();
+
+        while (match(OR)) {
+                Token op = previous();
+                Expr* right = _and();
+                e = new LogicalExpr(e, op, right);
+        }
+        return e;
+}
+
+Expr* Parser::_and()
+{
+        Expr* e = equality();
+
+        while (match(AND)) {
+                Token op = previous();
+                Expr* right = equality();
+                e = new LogicalExpr(e, op, right);
+        }
+        return e;
+}
+
+Stmt* Parser::whileStatement()
+{
+        consume(LEFT_PAREN, "Expect '(' before 'while'.");
+        Expr* condition = expression();
+        consume(RIGHT_PAREN, "Expect ')' after 'while'.");
+        Stmt* body = statement();
+        return new WhileStmt(condition, body);
+}
+
+Stmt* Parser::forStatement()
+{
+        consume(LEFT_PAREN, "Expect '(' before 'for' loop.");
+
+        Stmt* initializer;
+        if (match(SEMICOLON)) {
+                initializer = 0;
+        } else if (match(VAR)) {
+                initializer = varDeclaration();
+        } else {
+                initializer = expressionStmt();
+        }
+
+        Expr* condition = 0;
+        if (!check(SEMICOLON)) {
+                condition = expression();
+        }
+        consume(SEMICOLON, "Expect ';' after condition in for loop");
+
+        Expr* increment = 0;
+        if (!check(RIGHT_PAREN)) {
+                increment = expression();
+        }
+        consume(RIGHT_PAREN, "Expect ')' after 'for loop'.");
+
+        Stmt* body = statement();
+
+        if (increment != 0 ) {
+                body = new BlockStmt({body, new ExpressionStmt(increment)});
+        }
+
+        if (condition == 0) {
+                condition = new Literal(Value(true));
+        }
+
+        body = new WhileStmt(condition, body);
+        if (initializer != 0) {
+                body = new BlockStmt({initializer, body});
+        }
+        return body;
 }
