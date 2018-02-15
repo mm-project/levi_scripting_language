@@ -1,6 +1,7 @@
-CFLAGS += -g -std=gnu++0x -static-libstdc++ #-Wall
+CFLAGS += -fprofile-arcs -ftest-coverage -g -std=gnu++0x -static-libstdc++ #-Wall
 
-
+coverage:  init objroot/value.o objroot/stmt.o objroot/expr.o objroot/scanner.o objroot/parser.o objroot/interpreter.o objroot/environment.o objroot/main.o
+	g++ $(CFLAGS) objroot/value.o objroot/stmt.o objroot/expr.o objroot/scanner.o objroot/parser.o objroot/interpreter.o objroot/environment.o objroot/main.o -o bin/levi 
 	
 default: init objroot/value.o objroot/stmt.o objroot/expr.o objroot/scanner.o objroot/parser.o objroot/interpreter.o objroot/environment.o objroot/main.o
 	g++ $(CFLAGS) objroot/value.o objroot/stmt.o objroot/expr.o objroot/scanner.o objroot/parser.o objroot/interpreter.o objroot/environment.o objroot/main.o -o bin/levi 
