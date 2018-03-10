@@ -39,10 +39,16 @@ for test in `ls $tests_dir`; do
 
 done
 
-fails=`expr $fails + $fatal_fails`
 echo
 echo
 echo "*************************** UNIT TESTING RESULTS ********************"
+if [ "$total" == "0" ]; then
+	echo -e "\033[0;31m	NO UNIT TESTS AVAILBLE , please rebuild with <make full> \033[0m"
+	echo
+	exit 66
+fi
+
+fails=`expr $fails + $fatal_fails`
 echo "Total:  $total"
 echo
 echo "Pass:   $passed"

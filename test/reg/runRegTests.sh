@@ -6,7 +6,7 @@ mode=$1
 path=.
 
 levi_exe=$path/bin/levi
-out_dir=$path/reg_output
+out_dir=$path/.tmp/reg_output
 data_dir=$path/test/reg/data
 golden_dir=$path/test/reg/golden
 
@@ -18,6 +18,7 @@ fatal_fails=0
 mkdir -p $out_dir
 for fn in `ls $data_dir`; do
 	total=`expr $total + 1`
+	
 	testname=`echo $fn| cut -d'.' -f1`
 	echo  -ne "		Running test <$testname> : "
     
