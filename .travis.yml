@@ -1,16 +1,15 @@
-# Enable C++ support
 language: cpp
 
-# Compiler selection
+
 compiler:
   - g++
   
 script:
   - make
   - chmod 777 ./test/reg/runRegTests.sh
-  - ./test/reg/runRegTests.sh
-  # - kpsewhich tkz-graph.sty
-  # - ./build_pdf.sh
+  - chmod 777 ./test/unit/runUnitTests.sh
+  - chmod 777 ./test/unit/tests/*
+  - ./utils/runTests.sh
 
 after_script:
   #- ./test/reg/runRegTests.sh
