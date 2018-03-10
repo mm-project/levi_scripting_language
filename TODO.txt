@@ -5,3 +5,6 @@
 5. make wrapper runTests running unit test and reg tests.
 6. runCoverage scirpt
 7. add make rule for coverage instrumentation
+8. create dependedcies calulcation
+9. create auto export include calculation
+10. include paths and objecroot paths

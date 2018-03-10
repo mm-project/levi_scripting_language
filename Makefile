@@ -1,25 +1,36 @@
-LIBS := objroot/levi/liblevi.a objroot/parser/libparser.a objroot/vm/libvm.a
+#MODULES := levi parser vm
 
+YIELD_DIR=.tmp/objroot
+LIBS := $(YIELD_DIR)/levi/liblevi.a $(YIELD_DIR)/parser/libparser.a $(YIELD_DIR)/vm/libvm.a
+CC=g++
+CC_FLAFS+=-g -std=gnu++0x -static-libstdc++ 
+TGT=bin/levi
 
 deafult: levi
 
-levi: init $(LIBS)
-	$(CC) $(LIBS) -o bin/$@ 
+levi: $(LIBS)
+	$(CC) $(CC_FLAFS) $(LIBS) -o $(TGT)
 
-init:
-	mkdir -p .deps/levi
-	mkdir -p .deps/parser
-	mkdir -p .deps/vm
-	
-	mkdir -p .objroot/levi
-	mkdir -p .objroot/parser
-	mkdir -p .objroot/vm
 
-objroot/levi/liblevi.a: 
+$(YIELD_DIR)/levi/liblevi.a: 
 	cd src/levi; make; cd -
 	
-objroot/parser/libparser.a: 
+$(YIELD_DIR)/parser/libparser.a: 
 	cd src/parser; make; cd -
 	
-objroot/vm/libvm.a: 
+$(YIELD_DIR)/vm/libvm.a: 
 	cd src/vm; make; cd -
+	
+clean:
+	rm -rf $(YIELD_DIR)
+	rm -f $(TGT)
+	rm -f test/unit/tests/*
+	#rm -f `find -name "*.o"`
+	#rm -f `find -name "*.a"`
+	
+test:
+	cd src/parser; make test; cd -
+	cd src/vm; make test; cd -
+	cd src/levi; make test; cd -
+	
+rebuild: clean levi test

@@ -1,15 +1,36 @@
+MODULE=parser
+ODIR=../../.tmp/objroot/$(MODULE)
+#TGT=$(ODIR)/lib$(MODULE).a
+TGT=lib$(MODULE).a
 CC=g++
-CC_FLAFS=-g
+CC_FLAFS+=-g
 
 #FIXME fullpath
-INCS:=../ ../parser
+INCS:=-I ../ -I ../$(MODULE)
 
 SRCS=$(wildcard *.cpp)
 OBJS=$(SRCS:.cpp=.o)
 AR=ar
 
 %.o : %.cpp
-		$(CC) $< $(CC_FLAFS) -I $(INCS) -c -o $@ 
+	$(CC) $< $(CC_FLAFS) $(INCS) -c -o $(ODIR)/$@ 
 
-default: $(OBJS)
-		$(AR) rcs ../../.objroot/parser/libparser.a $^  
+default: init install 
+
+init:
+		mkdir -p $(ODIR)
+		
+install: $(OBJS)
+		cd $(ODIR); $(AR) rcs $(TGT) $^  
+
+		
+clean:
+	rm -f $(TGT)
+	rm -f $(ODIR)/*.o
+	rm -f $(ODIR)/*.a
+	
+
+test:
+	cd test; make; cd -
+	
+rebuild: clean install test

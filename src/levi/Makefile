@@ -1,16 +1,33 @@
+MODULE=levi
+ODIR=../../.tmp/objroot/$(MODULE)
+#TGT=$(ODIR)/lib$(MODULE).a
+TGT=lib$(MODULE).a
 CC=g++
-CC_FLAFS=-g
+CC_FLAFS+=-g
 
 #FIXME fullpath
-#INCS:=../../include/
-INCS:=../ ../parser
+INCS:=-I ../ -I ../$(MODULE)
 
 SRCS=$(wildcard *.cpp)
 OBJS=$(SRCS:.cpp=.o)
 AR=ar
 
 %.o : %.cpp
-		$(CC) $< $(CC_FLAFS) -I $(INCS) -c -o $@ 
+	$(CC) $< $(CC_FLAFS) $(INCS) -c -o $(ODIR)/$@ 
 
-default: $(OBJS)
-		$(AR) rcs ../../.objroot/levi/liblevi.a $^  
+default: init install 
+
+init:
+		mkdir -p $(ODIR)
+		
+install: $(OBJS)
+		cd $(ODIR); $(AR) rcs $(TGT) $^  
+
+		
+clean:
+	rm -f $(TGT)
+	rm -f $(ODIR)/*.o
+	rm -f $(ODIR)/*.a
+	
+	
+rebuild: clean install 
