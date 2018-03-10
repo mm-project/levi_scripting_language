@@ -3,7 +3,7 @@
 YIELD_DIR=.tmp/objroot
 LIBS := $(YIELD_DIR)/levi/liblevi.a $(YIELD_DIR)/parser/libparser.a $(YIELD_DIR)/vm/libvm.a
 CC=g++
-CC_FLAFS+=-g -std=gnu++0x -static-libstdc++ 
+CC_FLAFS+=-g -static-libstdc++ 
 TGT=bin/levi
 
 deafult: levi
@@ -25,12 +25,11 @@ clean:
 	rm -rf $(YIELD_DIR)
 	rm -f $(TGT)
 	rm -f test/unit/tests/*
-	#rm -f `find -name "*.o"`
-	#rm -f `find -name "*.a"`
+	rm -f `find -name "*.o"`
+	rm -f `find -name "*.a"`
 	
-test:
-	cd src/parser; make test; cd -
-	cd src/vm; make test; cd -
-	cd src/levi; make test; cd -
+unit_test:
+	cd src/parser; make unit_test; cd -
+	cd src/vm; make unit_test; cd -
 	
-rebuild: clean levi test
+rebuild: clean levi unit_test
