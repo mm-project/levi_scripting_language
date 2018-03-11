@@ -10,16 +10,12 @@ Environment::Environment() :enclosing(0)
 Environment::Environment(Environment* e) : enclosing(e)
 {}
 
-void Environment::define(const std::string& name, const Value& var)
+void Environment::define(std::string name, Value var)
 {
-        /*auto search = m_variables.find(name);
-        if (search != m_variables.end()) { //TODO : change to warning?
-                throw Runtime_error("Variable " + name + " is already declared.");
-        }*/
         m_variables[name] = var;
 }
 
-Value Environment::get_variable(const std::string& name)
+Value Environment::get_variable(std::string name)
 {
         auto search = m_variables.find(name);
         if (search != m_variables.end()) {
@@ -31,7 +27,7 @@ Value Environment::get_variable(const std::string& name)
         throw Runtime_error("Undefined variable " + name + ".");
 }
 
-void Environment::assign(Token name, Value& v)
+void Environment::assign(Token name, Value v)
 {
         std::string n = name.lexeme;
         auto search = m_variables.find(n);

@@ -31,3 +31,13 @@ void WhileStmt::accept(StmtVisitor* v)
 {
         v->visitWhileStmt(this);
 }
+
+void FunctionStmt::accept(StmtVisitor* v)
+{
+        v->visitFunctionStmt(this);
+}
+
+void ReturnStmt::accept(StmtVisitor* v)
+{
+        v->visitReturnStmt(this);
+}

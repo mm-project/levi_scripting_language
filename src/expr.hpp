@@ -6,6 +6,11 @@
 #include "visitor_interface.hpp"
 
 #include <string>
+#include <vector>
+
+#include <iostream>
+
+class Stmt;
 
 class Expr {
 public:
@@ -105,6 +110,37 @@ private:
         Expr* m_left;
         Token m_operator;
         Expr* m_right;
+};
+
+class CallExpr : public Expr
+{
+public:
+        friend class Interpreter;
+
+        CallExpr(Expr* callee, Token paren, std::vector<Expr*> args)
+                : m_callee(callee), m_paren(paren), m_arguments(args) {}
+
+        virtual void accept(ExprVisitor*);
+
+private:
+        Expr* m_callee;
+        Token m_paren;
+        std::vector<Expr*> m_arguments;
+};
+
+class FunctionExpr : public Expr
+{
+public:
+        friend class Interpreter;
+        friend class Function;
+
+        FunctionExpr(std::vector<Token> t, std::vector<Stmt*> s)
+                : m_parameters(t), m_body(s) {}
+
+        virtual void accept(ExprVisitor*);
+private:
+        std::vector<Token> m_parameters;
+        std::vector<Stmt*> m_body;
 };
 
 #endif

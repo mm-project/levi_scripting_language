@@ -75,6 +75,10 @@ void Scanner::identifier()
                 tokens.push_back(Token(WHILE, text, line));
         } else if (text == "for") {
                 tokens.push_back(Token(FOR, text, line));
+        } else if (text == "function") {
+                tokens.push_back(Token(FUNCTION, text, line));
+        } else if (text == "return") {
+                tokens.push_back(Token(RETURN, text, line));
         } else {
                 tokens.push_back(Token(IDENTIFIER,text, line) );
         }

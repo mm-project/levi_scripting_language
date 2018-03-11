@@ -129,7 +129,54 @@ Expr* Parser::unary()
 		Expr* right = unary();
 	        return new Unary(op, right);
 	}
-	return primary();
+        return call();
+}
+
+Expr* Parser::_function(std::string s)
+{
+        consume(LEFT_PAREN, "Expected ( name.");
+        std::vector<Token> parameters;
+
+        if (!check(RIGHT_PAREN)) {
+               do {
+                       if (parameters.size() >= 32) {
+                               throw Parser_error(peek(), "max arguments");
+                       }
+                       parameters.push_back(consume(IDENTIFIER, "ident"));
+               } while(match(COMMA));
+        }
+        consume(RIGHT_PAREN, "Expect ')' after parameters.");
+        consume(LEFT_BRACE, "Expect '{' before function body.");
+        std::vector<Stmt*> body = block();
+        return new FunctionExpr(parameters, body);
+}
+
+Expr* Parser::call()
+{
+        Expr* e = primary();
+
+        while (true) {
+                if (match(LEFT_PAREN)) {
+                        e = finishCall(e); //TODO: add identifier
+                } else {
+                        break;
+                }
+        }
+        return e;
+}
+
+Expr* Parser::finishCall(Expr* callee)
+{
+        std::vector<Expr*> arguments;
+
+        if (!check(RIGHT_PAREN)) {
+                do {
+                        arguments.push_back(expression());
+                } while (match(COMMA));
+        }
+        //TODO: add max arguments checking
+        Token paren = consume(RIGHT_PAREN, "Expect ')' apter arguments.");
+        return new CallExpr(callee, paren, arguments);
 }
 
 Expr* Parser::primary()
@@ -146,6 +193,9 @@ Expr* Parser::primary()
         }
         if (match(IDENTIFIER)) {
                 return new VariableExpr(previous());
+        }
+        if (match(FUNCTION)) {
+                return _function("function");
         }
     	if (match(LEFT_PAREN)) {
   		Expr* expr = expression();
@@ -186,7 +236,7 @@ void Parser::synchronize()
 			case IF:
 			case WHILE:
 			case VAR:
-			case FUN:
+			case FUNCTION:
 			case FOR:
 			case PRINT:
 			case RETURN:
@@ -203,6 +253,8 @@ Stmt* Parser::statement()
         if (match(FOR)) return forStatement();
 
         if (match(PRINT)) return printStmt();
+
+        if (match(RETURN)) return returnStmt();
 
         if (match(WHILE)) return whileStatement();
 
@@ -228,6 +280,7 @@ Stmt* Parser::expressionStmt()
 Stmt* Parser::declaration()
 {
         try {
+                if (match(FUNCTION)) return functionDeclaration("function");
                 if (match(VAR)) return varDeclaration();
                 return statement();
         } catch (Parser_error& e) {
@@ -235,6 +288,14 @@ Stmt* Parser::declaration()
                 synchronize();
                 return 0;
         }
+}
+
+Stmt* Parser::functionDeclaration(std::string s)
+{
+        Token name = consume(IDENTIFIER, "");
+
+        FunctionExpr* fexpr = static_cast<FunctionExpr*>(_function(s));
+        return new FunctionStmt(name, fexpr);
 }
 
 Stmt* Parser::varDeclaration()
@@ -348,4 +409,16 @@ Stmt* Parser::forStatement()
                 body = new BlockStmt({initializer, body});
         }
         return body;
+}
+
+Stmt* Parser::returnStmt()
+{
+        Token name = previous();
+        Expr* value;
+        if (!check(SEMICOLON)) {
+                value = expression();
+        }
+
+        consume(SEMICOLON, "Expected ';' after return.");
+        return new ReturnStmt(name, value);
 }
