@@ -6,7 +6,10 @@ CC=g++
 CC_FLAFS+=-g -static-libstdc++ 
 TGT=bin/levi
 
-deafult: levi
+deafult: init levi
+
+init:
+	mkdir -p bin
 
 levi: $(LIBS)
 	$(CC) $(CC_FLAFS) $(LIBS) -o $(TGT)
@@ -32,4 +35,4 @@ unit_test:
 	cd src/parser; make unit_test; cd -
 	cd src/vm; make unit_test; cd -
 	
-rebuild: clean levi unit_test
+rebuild: clean init levi unit_test
