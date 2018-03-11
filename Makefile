@@ -36,6 +36,7 @@ clean:
 	rm -f `find -name "*.a"`
 	
 unit_test:
+	mkdir -p test/unit/tests
 	cd src/parser; make unit_test; cd -
 	cd src/vm; make unit_test; cd -
 	cd src/bytecode; make unit_test; cd -
