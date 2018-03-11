@@ -23,6 +23,9 @@ $(YIELD_DIR)/parser/libparser.a:
 	
 $(YIELD_DIR)/vm/libvm.a: 
 	cd src/vm; make; cd -
+
+$(YIELD_DIR)/vm/libbytecode.a: 
+	cd src/bytecode; make; cd -
 	
 clean:
 	rm -rf $(YIELD_DIR)
@@ -34,5 +37,6 @@ clean:
 unit_test:
 	cd src/parser; make unit_test; cd -
 	cd src/vm; make unit_test; cd -
+	cd src/bytecode; make unit_test; cd -
 	
 rebuild: clean init levi unit_test

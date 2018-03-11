@@ -5,7 +5,7 @@ compiler:
   - g++
   
 script:
-  - make
+  - make 
   - chmod 777 ./test/reg/runRegTests.sh
   - chmod 777 ./test/unit/runUnitTests.sh
   - chmod 777 ./test/unit/tests/*
