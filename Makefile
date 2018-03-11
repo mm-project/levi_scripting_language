@@ -25,7 +25,7 @@ $(YIELD_DIR)/parser/libparser.a:
 $(YIELD_DIR)/vm/libvm.a: 
 	cd src/vm; make; cd -
 
-$(YIELD_DIR)/vm/libbytecode.a: 
+$(YIELD_DIR)/bytecode/libbytecode.a: 
 	cd src/bytecode; make; cd -
 	
 clean:
