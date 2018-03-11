@@ -1,7 +1,7 @@
 #MODULES := levi parser vm
 
 YIELD_DIR=.tmp/objroot
-LIBS := $(YIELD_DIR)/levi/liblevi.a $(YIELD_DIR)/parser/libparser.a $(YIELD_DIR)/vm/libvm.a
+LIBS := $(YIELD_DIR)/levi/liblevi.a $(YIELD_DIR)/parser/libparser.a $(YIELD_DIR)/vm/libvm.a  $(YIELD_DIR)/bytecode/libbytecode.a
 CC=g++
 CC_FLAFS+=-g -static-libstdc++ 
 TGT=bin/levi
@@ -9,6 +9,7 @@ TGT=bin/levi
 deafult: init levi
 
 init:
+	mkdir -p $(YIELD_DIR)
 	mkdir -p bin
 
 levi: $(LIBS)

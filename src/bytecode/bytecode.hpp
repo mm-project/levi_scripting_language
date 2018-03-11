@@ -1,4 +1,9 @@
-#ifndef vm_hpp
-#define vm_hpp
+#ifndef bytecode_hpp
+#define bytecode_hpp
+
+class Bytecode
+{
+	
+};
 
 #endif
