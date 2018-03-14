@@ -3,7 +3,7 @@ MODULE=integ
 TEST=$(MODULE)Test
 TGT=../../../test/unit/tests/$(TEST)
 CC=g++
-CC_FLAFS=-g  -static-libstdc++ -std=gnu++0x
+CC_FLAFS=-g -fPIC -static-libstdc++ -std=gnu++0x
 #FIXME fullpath
 
 INCS:=-I../../../ext/catch-2.1.2 -I ../ -I ../../
