@@ -1,12 +1,15 @@
-MODULE=parser
+MODULE=levi_interp
 ODIR=../../.tmp/objroot/$(MODULE)
 #TGT=$(ODIR)/lib$(MODULE).a
-TGT=lib$(MODULE).a
+TGT=lib$(MODULE).so
 CC=g++
-CC_FLAFS+=-g -std=gnu++0x  -static-libstdc++ 
+CC_FLAFS+=-g  -static-libstdc++  -std=gnu++0x
 
 #FIXME fullpath
-INCS:=-I ../ -I ../$(MODULE)
+INCS:=-I ../ -I ../../ -I ../$(MODULE)
+LIB_PATH:=../../lib
+LIBS:=$(LIB_PATH)/libparser.a
+
 
 SRCS=$(wildcard *.cpp)
 OBJS=$(SRCS:.cpp=.o)
@@ -20,17 +23,17 @@ default: init install
 init:
 		mkdir -p $(ODIR)
 		
+#FIXME , will not compile if many cpp/object files		
 install: $(OBJS)
-		cd $(ODIR); $(AR) rcs $(TGT) $^  
+		$(CC) $(CC_FLAFS) $(ODIR)/$^ $(LIBS) -shared -o $(LIB_PATH)/$(TGT)
 
 		
 clean:
-	rm -f $(ODIR)/lib$(MODULE).a
+	rm -f $(TGT)
 	rm -f $(ODIR)/*.o
 	rm -f $(ODIR)/*.a
 	
-
 unit_test:
 	cd test; make; cd -
 	
-rebuild: clean install unit_test
+rebuild: clean install 

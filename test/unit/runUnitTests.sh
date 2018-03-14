@@ -5,6 +5,7 @@ mode=$1
 #FIXME
 path=.
 
+source $path/bsys/bin/set_dev_env.sh
 levi_exe=$path/bin/levi
 tests_dir=$path/test/unit/tests
 
