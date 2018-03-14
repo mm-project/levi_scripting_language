@@ -28,6 +28,8 @@ public:
         virtual void visitVariableExpr(VariableExpr*);
         virtual void visitAssignExpr(AssignExpr*);
         virtual void visitLogicalExpr(LogicalExpr*);
+        virtual void visitCallExpr(CallExpr*);
+        virtual void visitFunctionExpr(FunctionExpr*);
 
         void execute(Stmt*);
 
@@ -37,12 +39,13 @@ public:
         virtual void visitBlockStmt(BlockStmt*);
         virtual void visitIfStmt(IfStmt*);
         virtual void visitWhileStmt(WhileStmt*);
-
-private:
+        virtual void visitFunctionStmt(FunctionStmt*);
+        virtual void visitReturnStmt(ReturnStmt*);
 
         void executeBlock(std::vector<Stmt*>, Environment*);
 private:
 
+        Environment* m_globals;
         Environment* m_environment;
 
         void checkOperands(Token,Value&,Value&);

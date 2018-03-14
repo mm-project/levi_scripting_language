@@ -7,6 +7,7 @@
 
 class Expr;
 class StmtVisitor;
+class FunctionExpr;
 
 class Stmt
 {
@@ -99,6 +100,37 @@ public:
 private:
         Expr* m_condition;
         Stmt* m_body;
+};
+
+class FunctionStmt : public Stmt
+{
+public:
+        friend class Interpreter;
+
+        FunctionStmt(Token name, FunctionExpr* declaration)
+                        : m_name(name),
+                        m_declaration(declaration) {}
+
+        virtual void accept(StmtVisitor*);
+
+private:
+        Token m_name;
+        FunctionExpr* m_declaration;
+};
+
+class ReturnStmt : public Stmt
+{
+public:
+        friend class Interpreter;
+
+        ReturnStmt(Token k, Expr* e)
+                : m_keyword(k),
+                m_value(e) {}
+
+        virtual void accept(StmtVisitor*);
+private:
+        Token m_keyword;
+        Expr* m_value;
 };
 
 #endif

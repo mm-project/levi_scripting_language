@@ -37,3 +37,13 @@ void LogicalExpr::accept(ExprVisitor* v)
 {
         v->visitLogicalExpr(this);
 }
+
+void CallExpr::accept(ExprVisitor* v)
+{
+        v->visitCallExpr(this);
+}
+
+void FunctionExpr::accept(ExprVisitor* v)
+{
+        v->visitFunctionExpr(this);
+}

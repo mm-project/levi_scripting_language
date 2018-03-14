@@ -11,6 +11,8 @@ class Grouping;
 class VariableExpr;
 class AssignExpr;
 class LogicalExpr;
+class CallExpr;
+class FunctionExpr;
 
 class ExpressionStmt;
 class PrintStmt;
@@ -18,6 +20,8 @@ class VarStmt;
 class BlockStmt;
 class IfStmt;
 class WhileStmt;
+class FunctionStmt;
+class ReturnStmt;
 
 class ExprVisitor
 {
@@ -29,6 +33,8 @@ public:
         virtual void visitVariableExpr(VariableExpr*) = 0;
         virtual void visitAssignExpr(AssignExpr*) = 0;
         virtual void visitLogicalExpr(LogicalExpr*) = 0;
+        virtual void visitCallExpr(CallExpr*) = 0;
+        virtual void visitFunctionExpr(FunctionExpr*) = 0;
 };
 
 class StmtVisitor
@@ -40,6 +46,8 @@ public:
         virtual void visitBlockStmt(BlockStmt*) = 0;
         virtual void visitIfStmt(IfStmt*) = 0;
         virtual void visitWhileStmt(WhileStmt*) = 0;
+        virtual void visitFunctionStmt(FunctionStmt*) = 0;
+        virtual void visitReturnStmt(ReturnStmt*) = 0;
 };
 
 #endif

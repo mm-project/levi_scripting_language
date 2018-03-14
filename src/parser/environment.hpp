@@ -13,11 +13,11 @@ public:
 
         Environment(Environment*);
 
-        void define(const std::string&, const Value&);
+        void define(std::string, Value);
 
-        Value get_variable(const std::string&);
+        Value get_variable(std::string);
 
-        void assign(Token, Value&);
+        void assign(Token, Value);
 private:
 
         Environment* enclosing;

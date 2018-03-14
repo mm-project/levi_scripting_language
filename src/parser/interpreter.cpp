@@ -4,12 +4,17 @@
 #include "expr.hpp"
 #include "error.hpp"
 #include "stmt.hpp"
+#include "native_functions.hpp"
+#include "callable.hpp"
+#include "function.hpp"
+#include "return.hpp"
 
 #include <iostream>
 
-Interpreter::Interpreter()
+Interpreter::Interpreter(): m_globals(new Environment())
 {
-        m_environment = new Environment();
+        m_globals->define("time", Value(new ClockFunction()));
+        m_environment = m_globals;
 }
 
 std::string Interpreter::interpreter(Expr* e)
@@ -218,15 +223,17 @@ void Interpreter::executeBlock(std::vector<Stmt*> stmts, Environment* env)
                 for (auto it = stmts.begin(); it != stmts.end(); ++it) {
                         execute(*it);
                 }
-                m_environment = prev; //TODO: check me, I can be wrong
+                m_environment = prev;
         } catch (Runtime_error& e) {
                 m_environment = prev;
                 //m_exception_happend = true;
                 //std::cout << e.what() << std::endl;
         } catch (Parser_error& e) {
                 m_environment = prev;
+        } catch(Return& e) {
+                m_environment = prev; //TODO: fixme
+                throw e;
         }
-        //delete prev;
 }
 
 void Interpreter::visitIfStmt(IfStmt* s)
@@ -261,4 +268,45 @@ void Interpreter::visitWhileStmt(WhileStmt* s)
                 execute(s->m_body);
                 v = evaluate(s->m_condition);
         }
+}
+
+void Interpreter::visitCallExpr(CallExpr* e)
+{
+        Value callee = evaluate(e->m_callee);
+
+        // check if callee is callable
+        std::vector<Value> args;
+        Callable* callable = callee.get_callable();
+        try {
+                if (callable->arity() != e->m_arguments.size()) {
+                        throw Runtime_error("wrong arguments");
+                }
+                for (unsigned i = 0; i < e->m_arguments.size(); ++i) {
+                        args.push_back(evaluate(e->m_arguments[i]));
+                }
+                m_value = callable->call(this, args);
+        } catch(Runtime_error& e) {
+                std::cout << e.what() << std::endl;
+        }
+}
+
+void Interpreter::visitFunctionExpr(FunctionExpr* e)
+{
+        Function* fun= new Function(e, m_environment, false);
+        m_value = Value(fun);
+}
+
+void Interpreter::visitFunctionStmt(FunctionStmt* e)
+{
+        Function* fun = new Function(e->m_declaration, m_environment, false, e->m_name.lexeme);
+        m_environment->define(e->m_name.lexeme, Value(fun));
+}
+
+void Interpreter::visitReturnStmt(ReturnStmt* e)
+{
+        Value value;
+        if (e->m_value != 0) {
+                value = evaluate(e->m_value);
+        }
+        throw Return(value);
 }

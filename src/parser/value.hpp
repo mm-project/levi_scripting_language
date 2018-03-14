@@ -3,7 +3,9 @@
 
 #include <string>
 
-enum Type {_NIL, BOOL, _STRING, _NUMBER};
+class Callable;
+
+enum Type {_NIL, BOOL, _STRING, _NUMBER, CALLABLE};
 
 class Value
 {
@@ -12,12 +14,14 @@ public:
         Value(bool);
         Value(std::string);
         Value(double);
+        Value(Callable*);
         Value(const Value&);
 
         Type get_type() const;
         bool get_bool() const;
         std::string get_string() const;
         double get_number() const;
+        Callable* get_callable() const;
 
         bool is_truthy();
 
@@ -27,6 +31,7 @@ public:
         bool is_string();
         bool is_number();
         bool is_bool();
+        bool is_callable();
 
         std::string Stringfy();
 private:
@@ -34,6 +39,7 @@ private:
         bool m_boolValue;
         std::string m_stringValue;
         double m_numberValue;
+        Callable* m_callableValue;
 };
 
 #endif

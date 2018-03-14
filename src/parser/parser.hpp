@@ -22,6 +22,9 @@ private:
 	Expr* multiplication();
 	Expr* unary();
 	Expr* primary();
+        Expr* call();
+        Expr* finishCall(Expr*);
+        Expr* _function(std::string);
 
         Expr* _or();
         Expr* _and();
@@ -36,6 +39,8 @@ private:
         Stmt* ifStmt();
         Stmt* whileStatement();
         Stmt* forStatement();
+        Stmt* functionDeclaration(std::string);
+        Stmt* returnStmt();
 
 	bool match(Token_type type = EOF_, Token_type type2 = EOF_, Token_type type3 = EOF_, Token_type type4 = EOF_);
 	bool check(Token_type);
