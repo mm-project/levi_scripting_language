@@ -1,5 +1,8 @@
 #!/bin/bash
 
+export BUILD_PATH=`pwd`
+source $BUILD_PATH/bsys/bin/set_dev_env.sh
+
 function print_gunavor 
 {
 	sta=$1

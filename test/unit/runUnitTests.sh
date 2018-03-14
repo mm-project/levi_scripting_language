@@ -3,23 +3,28 @@
 mode=$1
 
 #FIXME
-path=.
+path=$BUILD_PATH
 
 source $path/bsys/bin/set_dev_env.sh
 levi_exe=$path/bin/levi
 tests_dir=$path/test/unit/tests
-
+out_dir=$path/.tmp/unittest_output
 
 passed=0
 total=0
 fails=0
 fatal_fails=0
 
-#mkdir -p $out_dir
+mkdir -p $out_dir
+cd $out_dir
+#FIXME workaround
+cp $BUILD_PATH/lib/* ./
+
 for test in `ls $tests_dir`; do
 	total=`expr $total + 1`
 	testname=`echo $test| cut -d'.' -f1`
 	echo  -ne "		Running unit-test <$testname> : "
+	
 	$tests_dir/$test &> /dev/null
 	exit_status=$?
 	if [ "$exit_status" != "0" ]; then
@@ -61,4 +66,6 @@ echo
 #rm -rf $out_dir
 
 #FIXME HACK, if nothing failed than ok :) 
+#cd -
+
 exit $fails
