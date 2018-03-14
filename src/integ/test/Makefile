@@ -16,11 +16,14 @@ LIBS:=$(LIB_PATH)/liblevi_interp.so
 SRCS:=$(wildcard *.cpp)
 OBJS:=$(SRCS:.cpp=.o)
 
-%.o : %.cpp
-		$(CC) $(CC_FLAFS) $(INCS) $< -c -o $@ 
+#%.o : %.cpp
+		#$(CC) $(CC_FLAFS) $(INCS) $< -c -o $@ 
 
-default: $(OBJS)
-		$(CC) $(CC_FLAFS) $^ -L $(LIB_PATH) $(LIBS) -o $(TGT)
+#default: $(OBJS)
+		#$(CC) $(CC_FLAFS) $^ -L $(LIB_PATH) $(LIBS) -o $(TGT)
+
+default: 
+		$(CC) $(CC_FLAFS) test.cpp -L $(LIB_PATH) $(LIBS) -o $(TGT)
 		
 clean:
 	rm -f $(TGT)
