@@ -2,9 +2,9 @@
 #include <fstream>
 #include <sstream>
 
-#include "scanner.hpp"
-#include "parser.hpp"
-#include "interpreter.hpp"
+#include <parser/scanner.hpp>
+#include <parser/parser.hpp>
+#include <parser/interpreter.hpp>
 
 std::string read_file(const std::string& filename)
 {
