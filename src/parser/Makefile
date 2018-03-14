@@ -3,7 +3,7 @@ ODIR=../../.tmp/objroot/$(MODULE)
 #TGT=$(ODIR)/lib$(MODULE).a
 TGT=lib$(MODULE).a
 CC=g++
-CC_FLAFS+=-g -std=gnu++0x  -static-libstdc++ 
+CC_FLAFS+=-g -fPIC -std=gnu++0x  -static-libstdc++ 
 
 #FIXME fullpath
 INCS:=-I ../ -I ../$(MODULE)
