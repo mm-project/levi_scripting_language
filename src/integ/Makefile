@@ -25,7 +25,7 @@ init:
 		
 #FIXME , will not compile if many cpp/object files		
 install: $(OBJS)
-		$(CC) $(CC_FLAFS) $(ODIR)/$^ $(LIBS) -shared -o $(LIB_PATH)/$(TGT)
+		$(CC) $(CC_FLAFS) $(ODIR)/$^ $(LIBS)  -fPIC -shared -o $(LIB_PATH)/$(TGT)
 
 		
 clean:
