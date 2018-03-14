@@ -23,7 +23,7 @@ OBJS:=$(SRCS:.cpp=.o)
 		#$(CC) $(CC_FLAFS) $^ -L $(LIB_PATH) $(LIBS) -o $(TGT)
 
 default: 
-		$(CC) $(CC_FLAFS) test.cpp -L $(LIB_PATH) $(LIBS) -o $(TGT)
+		$(CC) $(CC_FLAFS) $(INCS) test.cpp -L $(LIB_PATH) $(LIBS) -o $(TGT)
 		
 clean:
 	rm -f $(TGT)
