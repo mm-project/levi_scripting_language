@@ -22,6 +22,7 @@ OBJS:=$(SRCS:.cpp=.o)
 #default: $(OBJS)
 		#$(CC) $(CC_FLAFS) $^ -L $(LIB_PATH) $(LIBS) -o $(TGT)
 
+#FIXME
 default: 
 		$(CC) $(CC_FLAFS) $(INCS) test.cpp -L $(LIB_PATH) $(LIBS) -o $(TGT)
 		
