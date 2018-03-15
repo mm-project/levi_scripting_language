@@ -10,7 +10,7 @@ INCS:=-I../../../ext/catch-2.1.2 -I ../ -I ../../
 #FIXME insteaad use shared library
 LIB_PATH:=../../../lib
 #LIBS:=$(LIB_PATH)/liblevi_interp.so
-LIBS:= -llevi_interp.so
+LIBS:= -llevi_interp
 
 
 SRCS:=$(wildcard *.cpp)
