@@ -1,5 +1,20 @@
 #!/bin/bash
 
+#FIXME
+#export BUILD_PATH=`pwd`
+#$p=`pwd`
+
+
+root1="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+root2=`dirname $root1`
+root3=`dirname $root2`
+#root=`dirname $root3`
+
+#export BUILD_PATH=$root3
+source $root3/bsys/bin/set_dev_env.sh
+#echo "BUILD: $BUILD_PATH"
+
+
 function print_gunavor 
 {
 	sta=$1
@@ -13,7 +28,7 @@ function print_gunavor
 mode=$1
 
 #FIXME
-path=.
+path=$BUILD_PATH
 
 echo
 echo "************************************************"
