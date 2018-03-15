@@ -8,8 +8,8 @@ CC_FLAFS=-g -static-libstdc++ -std=gnu++0x
 
 INCS:=-I ../../../include
 LIB_PATH:=../../../lib
-LIBS:=$(LIB_PATH)/liblevi_interp.so
-#LIBS:=-llevi_interp
+#LIBS:=$(LIB_PATH)/liblevi_interp.so
+LIBS:=-llevi_interp
 
 
 SRCS:=$(wildcard *.cpp)

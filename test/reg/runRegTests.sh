@@ -3,10 +3,12 @@
 mode=$1
 
 #FIXME
-path=.
 
-source $path/bsys/bin/set_dev_env.sh
+self="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+source $self/../../bsys/bin/set_dev_env.sh
+
+path=$BUILD_PATH
 levi_exe=$path/bin/levi
 out_dir=$path/.tmp/reg_output
 data_dir=$path/test/reg/data

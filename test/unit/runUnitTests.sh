@@ -3,9 +3,12 @@
 mode=$1
 
 #FIXME
-path=$BUILD_PATH
 
-source $path/bsys/bin/set_dev_env.sh
+self="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+source $self/../../bsys/bin/set_dev_env.sh
+
+path=$BUILD_PATH
 levi_exe=$path/bin/levi
 tests_dir=$path/test/unit/tests
 out_dir=$path/.tmp/unittest_output
@@ -18,7 +21,7 @@ fatal_fails=0
 mkdir -p $out_dir
 cd $out_dir
 #FIXME workaround
-cp $BUILD_PATH/lib/* ./
+#cp $BUILD_PATH/lib/* ./
 
 for test in `ls $tests_dir`; do
 	total=`expr $total + 1`
