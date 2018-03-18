@@ -5,6 +5,7 @@ compiler:
   - g++
   
 script:
+  - chmod 777 ./bsys/bin/* 
   - ./bsys/bin/buildMe.sh 
 
 
