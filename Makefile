@@ -2,7 +2,7 @@
 YIELD_DIR=.tmp/objroot
 LIBS := $(YIELD_DIR)/levi/liblevi.a $(YIELD_DIR)/parser/libparser.a $(YIELD_DIR)/vm/libvm.a  $(YIELD_DIR)/bytecode/libbytecode.a
 CC=g++
-CC_FLAFS+=-g -static-libstdc++ -std=gnu++0x
+CC_FLAFS+= -g -static-libstdc++ -std=gnu++0x
 TGT=bin/levi
 
 deafult: init levi integ
