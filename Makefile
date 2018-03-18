@@ -5,7 +5,8 @@ CC=g++
 CC_FLAFS+= -g -static-libstdc++ -std=gnu++0x
 TGT=bin/levi
 
-deafult: levi integ
+#FIXME not need to do every time
+deafult: init levi integ
 
 init:
 	mkdir -p $(YIELD_DIR)
