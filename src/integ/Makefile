@@ -6,7 +6,8 @@ CC=g++
 CC_FLAFS+=-g   -fPIC -static-libstdc++  -std=gnu++0x
 
 #FIXME fullpath
-INCS:=-I ../ -I ../../ -I ../$(MODULE)
+#INCS:=-I ../ -I ../../ -I ../$(MODULE)
+INCS:=-I ../../include 
 LIB_PATH:=../../lib
 LIBS:=$(LIB_PATH)/libparser.a
 

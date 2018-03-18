@@ -20,6 +20,7 @@ for e in `cat $BUILD_PATH/bsys/etc/projects.lst`; do
 	#echo "<$prj>"
 	if [ "$prj" != "" ]; then
 		mkdir -p $BUILD_PATH/include/$prj
+		echo "create include dir: $BUILD_PATH/include/$prj"
 		cd $BUILD_PATH/include/$prj &> /dev/null
 			#pwd
 			#echo "ln -s ../../src/$prj/.*hpp ./"
