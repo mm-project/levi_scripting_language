@@ -5,7 +5,7 @@ compiler:
   - g++
   
 script:
-  - ./bsys/buildMe.sh 
+  - ./bsys/bin/buildMe.sh 
 
 
 after_script:
