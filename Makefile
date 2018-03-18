@@ -11,6 +11,7 @@ init:
 	mkdir -p $(YIELD_DIR)
 	mkdir -p bin
 	mkdir -p lib
+	./bsys/utils/createIncludeDir.sh
 
 levi: $(LIBS) integ
 	$(CC) $(CC_FLAFS) $(LIBS) -o $(TGT)
@@ -38,16 +39,21 @@ clean:
 	rm -rf $(YIELD_DIR)
 	rm -f $(TGT)
 	rm -rf lib/*
+	rm -rf include
 	rm -f test/unit/tests/*
 	rm -f `find -name "*.o"`
 	rm -f `find -name "*.a"`
 	
-unit_test:
+unit_tests:
 	mkdir -p test/unit/tests
 	cd src/parser; make unit_test; cd -
 	cd src/vm; make unit_test; cd -
 	cd src/bytecode; make unit_test; cd -
 	cd src/integ; make unit_test; cd -
 	
+examples:
+	cd doc/examples; make ; cd -
 	
-rebuild: clean init levi unit_test
+	
+rebuild: clean init levi unit_tests examples
+

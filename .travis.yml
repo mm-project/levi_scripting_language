@@ -5,13 +5,8 @@ compiler:
   - g++
   
 script:
-  - make 
-  - make unit_test 
-  - chmod 777 ./test/reg/runRegTests.sh
-  - chmod 777 ./test/unit/runUnitTests.sh
-  - chmod 777 ./test/unit/tests/*
-  - chmod 777 ./bsys/utils/runTests.sh
-  - ./bsys/utils/runTests.sh
+  - ./bsys/buildme.sh 
+
 
 after_script:
   #- ./test/reg/runRegTests.sh

@@ -1,5 +1,5 @@
 
-MODULE=ex1
+MODULE=ex2
 TEST=$(MODULE)
 TGT=../bin/$(TEST)
 CC=g++

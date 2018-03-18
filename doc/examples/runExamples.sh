@@ -1,32 +1,33 @@
 #!/bin/bash
 
-mode=$1
-
 #FIXME
-
 self="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 source $self/../../bsys/bin/set_dev_env.sh
 
 path=$BUILD_PATH
 levi_exe=$path/bin/levi
-tests_dir=$path/test/unit/tests
-out_dir=$path/.tmp/unittest_output
+tests_dir=$path/doc/examples/bin
+out_dir=$path/.tmp/examples_out
 
 passed=0
 total=0
 fails=0
 fatal_fails=0
 
+
 mkdir -p $out_dir
 cd $out_dir
+
+export LD_LIBRARY_PATH=`pwd`:$LD_LIBRARY_PATH
+ln -s $BUILD_PATH/lib/* . 
 #FIXME workaround
 #cp $BUILD_PATH/lib/* ./
 
 for test in `ls $tests_dir`; do
 	total=`expr $total + 1`
 	testname=`echo $test| cut -d'.' -f1`
-	echo  -ne "		Running unit-test <$testname> : "
+	echo  -ne "		Running example <$testname> : "
 	
 	$tests_dir/$test &> /dev/null
 	exit_status=$?
@@ -50,9 +51,9 @@ done
 
 echo
 echo
-echo "*************************** UNIT TESTING RESULTS ********************"
+echo "*************************** Examples  ********************"
 if [ "$total" == "0" ]; then
-	echo -e "\033[0;31m	NO UNIT TESTS AVAILBLE , please rebuild with <make full> \033[0m"
+	echo -e "\033[0;31m	NO EXAMPLES AVAILBLE , please rebuild with <make full> \033[0m"
 	echo
 	exit 66
 fi
