@@ -9,6 +9,17 @@ source $root3/bsys/bin/set_dev_env.sh
 
 cd $BUILD_PATH
 
+chmod 777 -R ./bsys/*
+chmod 777 -R ./test/*
+chmod 777 -R ./doc/*
+
+
+#chmod 777 ./test/reg/runRegTests.sh
+#chmod 777 ./test/unit/runUnitTests.sh
+#chmod 777 ./test/unit/tests/*
+#chmod 777 ./bsys/utils/runTests.sh
+
+
 echo "*******************************************************************************Compilation"
 make
 msta=$?
@@ -27,10 +38,6 @@ fi
 
 echo "*******************************************************************************Testing"
 
-chmod 777 ./test/reg/runRegTests.sh
-chmod 777 ./test/unit/runUnitTests.sh
-chmod 777 ./test/unit/tests/*
-chmod 777 ./bsys/utils/runTests.sh
 
 runTests.sh
 rtsta=$?
