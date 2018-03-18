@@ -10,6 +10,11 @@ root3=`dirname $root2`
 #exit 
 source $root3/bsys/bin/set_dev_env.sh
 
+if  [ ! -d $BUILD_PATH/bsys/etc/projects.lst ]
+	echo "Error: $BUILD_PATH/bsys/etc/projects.lst Not found"
+	exit 1
+fi
+
 for e in `cat $BUILD_PATH/bsys/etc/projects.lst`; do
 	
 	prj=`echo $e | cut -d':' -f1`
