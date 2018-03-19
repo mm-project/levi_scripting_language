@@ -9,7 +9,8 @@ self="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $self/../../bsys/bin/set_dev_env.sh
 
 path=$BUILD_PATH
-levi_exe=$path/bin/levi
+
+levi_exe=$path/bin/$LEVI_INTERP_EXENAME
 out_dir=$path/.tmp/reg_output
 data_dir=$path/test/reg/data
 golden_dir=$path/test/reg/golden

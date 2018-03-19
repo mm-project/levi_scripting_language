@@ -12,3 +12,12 @@ install_dir=$BUILD_PATH
 
 export PATH=$install_dir/bin/:$install_dir/test/unit/:$install_dir/doc/examples:$install_dir/doc/examples/bin:$$install_dir/test/reg:$install_dir/test/unit/tests/:$install_dir/bsys/utils:$install_dir/bsys/bin:$PATH
 export LD_LIBRARY_PATH=$install_dir/lib/:$LD_LIBRARY_PATH
+export LEVI_INTERP_EXENAME="leviInterp"
+export LEVI_VM_EXENAME="leviVM"
+export LEVI_COMPILER_EXENAME="leviC"
+
+
+
+#chmod 777 -R ./bsys/*
+#chmod 777 -R ./test/*
+#chmod 777 -R ./doc/*

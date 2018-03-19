@@ -1,5 +1,4 @@
-parser
-vm
-bytecode
+parser:static
+vm:executable
 integ:shared
-levi:executable
+interp:executable

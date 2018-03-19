@@ -25,12 +25,9 @@ install: $(OBJS)
 
 		
 clean:
-	rm -f $(ODIR)/lib$(MODULE).a
+	rm -f $(TGT)
 	rm -f $(ODIR)/*.o
 	rm -f $(ODIR)/*.a
 	
-
-unit_test:
-	cd test; make; cd -
 	
-rebuild: clean install unit_test
+rebuild: clean install 
