@@ -8,7 +8,8 @@ CC_FLAFS+= -g -static-libstdc++ -std=gnu++0x
 TGT=bin/leviInterp
 TGT2=bin/leviVM
 
-deafult: levi integ
+#FIXME not need to do every time
+deafult: init levi integ
 
 init:
 	mkdir -p $(YIELD_DIR)
