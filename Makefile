@@ -47,6 +47,7 @@ clean:
 	rm -rf $(TMP_DIR)
 	rm -rf $(YIELD_DIR)
 	rm -f bin/*
+	rm -rf doc/examples/bin
 	rm -rf lib/*
 	rm -rf include
 	rm -f test/unit/tests/*
