@@ -1,6 +1,7 @@
 #MODULES := levi parser vm
 YIELD_DIR=.tmp/objroot
-LIBS := $(YIELD_DIR)/interp/libinterp.a $(YIELD_DIR)/parser/libparser.a $(YIELD_DIR)/vm/libvm.a   
+LIBS := $(YIELD_DIR)/interp/libinterp.a $(YIELD_DIR)/parser/libparser.a  
+
 CC=g++
 CC_FLAFS+= -g -static-libstdc++ -std=gnu++0x
 TGT=bin/leviInterp
@@ -16,11 +17,14 @@ init:
 deps:
 	./bsys/utils/createIncludeDir.sh
 
-levi: $(LIBS) integ
+levi: $(LIBS) integ vm
 	$(CC) $(CC_FLAFS) $(YIELD_DIR)/interp/libinterp.a $(YIELD_DIR)/parser/libparser.a  -o $(TGT)
+	
+	
+vm:
+	cd src/vm; make; cd -
 	$(CC) $(CC_FLAFS) $(YIELD_DIR)/vm/libvm.a -o $(TGT2)
 	
-
 integ:
 	#cp $(YIELD_DIR)/levi/libparser.a lib/
 	cd src/integ; make; cd -

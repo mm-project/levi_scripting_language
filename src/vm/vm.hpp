@@ -10,7 +10,7 @@
 class LeviVirtualMachine
 {
 	public:
-		LeviVirtualMachine() {
+		/*LeviVirtualMachine() {
 			m_ip = 0;
 			m_num_data_regs = 3;
 			m_data_regs_size = 4;
@@ -18,55 +18,83 @@ class LeviVirtualMachine
 		}
 		
 		void execute_next_instruction() {
-				execute_bytecode(m_queue.pop());
+				execute_bytecode(m_queue.front());
+				m_queue.pop();
 		}
 		
 		void execute_bytecode(LBytecode& b ) {
-				OpCode code = b.get_opcode();
-				void* data = b.get_operands();
-				execute_opcode_on_data(code,data);
+				b.print_debug();
+				//OpCode code = b.get_opcode();
+				//bool* data = b.get_operands();
+				//execute_opcode_on_data(code,data);
 		}
-		
+		*/
 		void load(const std::string& fname) {
 			//TODO
-			bool* b = new bool(5);
-			b(0000,0000,0001)
-			b(0000,0000,0002)
-			b(0000,0000,0002)
-						
+				
+				util::string_2_boolarray("0001","0000000000000001");
+				util::string_2_boolarray("0001","0000000000000001");
+				util::string_2_boolarray("0001","0000000000000001");
+				util::string_2_boolarray("0001","0000000000000001");
+				
+			/*LBytecodeIntHelper h;
+			h.create_bytecode(MOV,"0001","0000000000000001");
+			h.create_bytecode(ADD,"0001","0000000000000001");
+			h.create_bytecode(MOV,"0001","0000000000000001");
 			
-			m_queue.push();
+			/*
+			m_queue.push(h.create_bytecode(MOV,"0001","0000000000000001"));
+			m_queue.push(h.create_bytecode(PNT,"0001",""));
+			m_queue.push(h.create_bytecode(MOV,"0101","0000000000000101"));
+			m_queue.push(h.create_bytecode(PNT,"0101",""));
+			m_queue.push(h.create_bytecode(ADD,"0001","0002"));
+			m_queue.push(h.create_bytecode(PNT,"1111",""));
+			m_queue.push(h.create_bytecode(NOP,"",""));
+			*/
 			
+			//m_queue.push();
+			//execute();
 		}
 		
+		/*
 		void execute() {
+			std::cout << "executing..." << std::endl;
+			
 			while ( ! m_queue.empty() ) {
+				std::cout << "que size: " << m_queue.size()  << std::endl;
 				execute_next_instruction();
 				m_ip++;
 			}
 		}
 
 
-		void execute_opcode_on_data(OpCode code, void* data ) {
+		void execute_opcode_on_data(OpCode code, bool* data ) {
 			switch( code ) {
-					RET:;
+					RET:
 						break;
 					
-					ADD:;
-					
-					MOV:;
+					ADD:
+						//std::cout << ""
 						break;
 					
-					JMP:;
+					MOV:
+						break;
+					
+					JMP:
 						break;
 				
 					NOP:;
 						break;
 					
-					CMP:;
+					CMP:
 						break;
 					
-					INC:;
+					INC:
+						break;
+					
+					PNT:
+						std::cout << "PRINT" << std::endl;
+						//std::cout << *data << std::endl;
 						break;
 					
 					default:
@@ -90,7 +118,7 @@ class LeviVirtualMachine
 			std::queue<LBytecode> m_queue;	
 			uint m_ip;
 
-	
+	*/
 };
 
 
