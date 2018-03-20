@@ -1,5 +1,6 @@
 #MODULES := levi parser vm
-YIELD_DIR=.tmp/objroot
+TMP_DIR=.tmp
+YIELD_DIR=$(TMP_DIR)/objroot
 LIBS := $(YIELD_DIR)/interp/libinterp.a $(YIELD_DIR)/parser/libparser.a  
 
 CC=g++
@@ -43,8 +44,9 @@ $(YIELD_DIR)/vm/libvm.a:
 
 	
 clean:
+	rm -rf $(TMP_DIR)
 	rm -rf $(YIELD_DIR)
-	rm -f $(TGT)
+	rm -f bin/*
 	rm -rf lib/*
 	rm -rf include
 	rm -f test/unit/tests/*
