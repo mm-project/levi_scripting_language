@@ -32,18 +32,27 @@ namespace util {
 	
 	
 	bool* string_2_boolarray(const std::string& str1, const std::string& str2) {
-		std::cout << "BEG:" << "string_2_boolarray" << std::endl;
+		//bool* res = 0 ;
+		//std::cout << "BEG:" << "string_2_boolarray" << std::endl;
 		std::string str(str1+str2);
 		int size = str.size(); 
-		std::cout << "string_2_boolarray: size: "<< size <<" , processing " << str << std::endl;
-		bool* res = new bool(size);
-		for(int i=0;i<size;i++) {
-			str[i]=='0'?res[i]=0:res[i]=1;
-			std::cout << res[i] ;
-		}
-		std::cout << std::endl;
+		//std::cout << "string_2_boolarray: size: "<< size <<" , processing " << str << std::endl;
+		bool* res = new bool[size];
 		
-		std::cout << "--END:" << "string_2_boolarray" << std::endl;
+		//*	
+		for(int i=0;i<str.size();i++) {
+			str[i]=='0'?res[i]=0:res[i]=1;
+			//if ( str[i]=='0' ) {
+				
+			//}
+			//std::cout << ( str[i]=='0' ) << " "  ;
+		}
+		//*/
+		//std::cout << std::endl;
+		
+		
+		//std::cout << "--END:" << "string_2_boolarray" << std::endl;
+	
 		return res;
 	}
 	

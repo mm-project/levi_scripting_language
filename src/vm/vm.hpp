@@ -7,10 +7,13 @@
 #include <vector>
 #include <cassert>
 
+
+
+
 class LeviVirtualMachine
 {
 	public:
-		/*LeviVirtualMachine() {
+		LeviVirtualMachine() {
 			m_ip = 0;
 			m_num_data_regs = 3;
 			m_data_regs_size = 4;
@@ -18,6 +21,7 @@ class LeviVirtualMachine
 		}
 		
 		void execute_next_instruction() {
+				//m_queue.front().print_debug();
 				execute_bytecode(m_queue.front());
 				m_queue.pop();
 		}
@@ -28,21 +32,21 @@ class LeviVirtualMachine
 				//bool* data = b.get_operands();
 				//execute_opcode_on_data(code,data);
 		}
-		*/
+		
 		void load(const std::string& fname) {
 			//TODO
 				
-				util::string_2_boolarray("0001","0000000000000001");
-				util::string_2_boolarray("0001","0000000000000001");
-				util::string_2_boolarray("0001","0000000000000001");
-				util::string_2_boolarray("0001","0000000000000001");
+				//util::string_2_boolarray("0001","0000000000000001");
+				//util::string_2_boolarray("0001","0000000000000001");
+				//util::string_2_boolarray("0001","0000000000000001");
+				//util::string_2_boolarray("0001","0000000000000001");
 				
-			/*LBytecodeIntHelper h;
-			h.create_bytecode(MOV,"0001","0000000000000001");
-			h.create_bytecode(ADD,"0001","0000000000000001");
-			h.create_bytecode(MOV,"0001","0000000000000001");
+			LBytecodeIntHelper h;
+			//h.create_bytecode(MOV,"0001","0000000000000001");
+			//h.create_bytecode(ADD,"0001","0000000000000001");
+			//h.create_bytecode(MOV,"0001","0000000000000001");
 			
-			/*
+			
 			m_queue.push(h.create_bytecode(MOV,"0001","0000000000000001"));
 			m_queue.push(h.create_bytecode(PNT,"0001",""));
 			m_queue.push(h.create_bytecode(MOV,"0101","0000000000000101"));
@@ -50,13 +54,13 @@ class LeviVirtualMachine
 			m_queue.push(h.create_bytecode(ADD,"0001","0002"));
 			m_queue.push(h.create_bytecode(PNT,"1111",""));
 			m_queue.push(h.create_bytecode(NOP,"",""));
-			*/
+			
 			
 			//m_queue.push();
-			//execute();
+			execute();
 		}
 		
-		/*
+		
 		void execute() {
 			std::cout << "executing..." << std::endl;
 			
@@ -70,29 +74,30 @@ class LeviVirtualMachine
 
 		void execute_opcode_on_data(OpCode code, bool* data ) {
 			switch( code ) {
-					RET:
+				
+					case RET:
 						break;
 					
-					ADD:
+					case ADD:
 						//std::cout << ""
 						break;
 					
-					MOV:
+					case MOV:
 						break;
 					
-					JMP:
+					case JMP:
 						break;
 				
-					NOP:;
+					case NOP:;
 						break;
 					
-					CMP:
+					case CMP:
 						break;
 					
-					INC:
+					case INC:
 						break;
 					
-					PNT:
+					case PNT:
 						std::cout << "PRINT" << std::endl;
 						//std::cout << *data << std::endl;
 						break;
@@ -118,7 +123,7 @@ class LeviVirtualMachine
 			std::queue<LBytecode> m_queue;	
 			uint m_ip;
 
-	*/
+
 };
 
 

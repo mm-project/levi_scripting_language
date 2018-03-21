@@ -11,15 +11,16 @@
 #include <util/conversion.hpp>
 
 enum OpCode {
-		PNT,
+		PNT = 0,
 		RET,
 		ADD,
 		MOV,
 		JMP,
 		NOP,
 		CMP,
-		INC,
+		INC
 };		
+
 
 
 
@@ -28,7 +29,7 @@ class LBytecode
 
 
 	public:		
-		//*
+		/*
 		LBytecode(bool* bytecode) {
 			//m_opcode = static_cast<OpCode>(bytecode[0]|bytecode[1]|bytecode[2]|bytecode[3]);
 			
@@ -38,69 +39,71 @@ class LBytecode
 		/**/
 		
 		LBytecode(OpCode code, bool* data) {
-			//m_opcode = code;
-			//m_operands = data;
+			m_opcode = code;
+			m_operands = data;
 			//std::cout << "Adding: "  << static_cast<int>(m_opcode) << std::endl;
 			//std::cout << "Adding: " << opcode_2_string(code) << std::endl;
-
+			//opcode_2_string(code);
 			}
 		
 		OpCode get_opcode(){
-			//return m_opcode;
+			return m_opcode;
 		}
 		
 		bool* get_operands() {
-			return 0;
-			//return m_operands;
+			//return 0;
+			return m_operands;
 		}
 
 		void print_debug() {
 			std::cout << "OPCODE(" << opcode_2_string(m_opcode) << "): " << std::endl;
 		}
 		
-	
+
 	private:	
 		std::string opcode_2_string(const OpCode& code) {
 			std::string r;
+			
+		
 			switch( code ) {
-				PNT:
+				case PNT:
 					r = "PNT";
 					break;
 					
-				RET:
+				case RET:
 					r = "RET";
 					break;
 					
-				ADD:
+				case ADD:
 					r = "ADD";
 					break;
 
-				MOV:
+				case MOV:
 					r = "MOV";
 					break;
 
-				JMP:
+				case JMP:
 					r = "JMP";
 					break;
 
-				NOP:
+				case NOP:
 					r = "NOP";
 					break;
 
 
-				CMP:
+				case CMP:
 					r = "CMP";
 					break;
 
 				
-				INC:
+				case INC:
 					r = "INC";
 					break;
 					
 				default:
 					r = "UNDEF";
-					std::cout << "DEFAULT:" << static_cast<int>(code) << std::endl;
-					//assert(0&&"Unknown opcode");
+					//std::cout << "DEFAULT:" << static_cast<int>(code) << std::endl;
+					assert(0&&"Unknown opcode");
 					break;
 			}
 		
@@ -109,7 +112,7 @@ class LBytecode
 	
 	private:	
 		//std::vector<bool> m_impl;
-		//bool* m_operands;
+		bool* m_operands;
 		OpCode m_opcode;
 
 		
@@ -121,15 +124,8 @@ class LBytecodeIntHelper
 {
 	public:
 		LBytecode create_bytecode(OpCode code, const std::string& arg1, const std::string& arg2) { //, const std::string& arg3) {
-			std::cout << "create_bytecode -> " << static_cast<int>(code) << std::endl;
-			//return LBytecode(0);
-			//return LBytecode(code,util::string_2_boolarray(arg1,arg2));
-			util::string_2_boolarray(arg1,arg2);
-			util::string_2_boolarray(arg1,arg2);
-			util::string_2_boolarray(arg1,arg2);
-			util::string_2_boolarray(arg1,arg2);
-			
-			return LBytecode(code,0);
+			//std::cout << "create_bytecode -> " << static_cast<int>(code) << std::endl;
+			return LBytecode(code,util::string_2_boolarray(arg1,arg2));
 		}
 	
 };
