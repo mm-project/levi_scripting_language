@@ -19,9 +19,17 @@ chmod 777 -R ./doc/*
 #chmod 777 ./test/unit/tests/*
 #chmod 777 ./bsys/utils/runTests.sh
 
+echo "*******************************************************************************Dependency generation"
+make deps
+msta=$?
+if [ "$msta" != "0" ]; then
+	echo "Dependency generation failed."
+	exit 1
+fi
+
 
 echo "*******************************************************************************Compilation"
-make
+make rebuild
 msta=$?
 if [ "$msta" != "0" ]; then
 	echo "Compilation failed"
