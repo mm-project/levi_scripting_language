@@ -31,6 +31,26 @@ namespace util {
 	}
 	
 	
+	int bin_2_dec_fixme(dsize* number, int len)
+	{
+		int result = 0, pow = 1;
+		for ( int i = len; i >= 0; --i, pow <<= 1 )
+			result += (number[i] - '0') * pow;
+
+		return result;
+	}
+	
+	std::string boolarray_2_string(dsize* arr, int size ) {
+		char* str = new char[size];
+		
+		std::string z(str);
+		for(int i=0;i<size;i++) {
+			arr[i]==0?z[i]='0':z[i]='1';
+			//if ( str[i]=='0' ) {
+		}
+		
+		return z;
+	}
 	
 	dsize* string_2_boolarray(const std::string& str1, const std::string& str2) {
 		//bool* res = 0 ;

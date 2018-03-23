@@ -116,7 +116,7 @@ class LBytecode
 				default:
 					r = "UNDEF";
 					//std::cout << "DEFAULT:" << static_cast<int>(code) << std::endl;
-					assert(0&&"Unknown opcode");
+					assert(0&&"opcode_2_string: unknown opcode");
 					break;
 			}
 		
@@ -126,6 +126,9 @@ class LBytecode
 	private:	
 		//std::vector<bool> m_impl;
 		dsize* m_operands;
+		dsize* m_first_operand;
+		dsize* m_second_operand;
+		
 		OpCode m_opcode;
 
 		

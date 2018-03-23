@@ -10,16 +10,22 @@ class WhileAsmProg : public AsmProg {
 		}
 		
 		void create_prog() {
-			AsmProg::add(MOV,"001","001");
-			AsmProg::add(INC,"001","");
-			AsmProg::add(CMP,"001","101");
+			AsmProg::add(MOV,"000","011");  // set 1 in reg[3]
+			AsmProg::add(INC,"011","");     // reg[3]++
+			AsmProg::add(CMP,"111","011");  // compare "7" with reg[3]  
 			AsmProg::add(JLE,"001","");
-			AsmProg::add(PNT,"001","");
+			AsmProg::add(PNT,"00","");
 			AsmProg::add(NOP,"","");
 		}
+		
+		void create_prog2() {
+			/*
+			AsmProg::(011,001,011); 
+			*/
+		}
+		
+		
 };
-
-
 
 
 void test(AsmProg* prg) {

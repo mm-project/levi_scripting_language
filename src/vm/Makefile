@@ -28,6 +28,7 @@ clean:
 	rm -f $(TGT)
 	rm -f $(ODIR)/*.o
 	rm -f $(ODIR)/*.a
+	cd test; make clean; cd -
 	
 	
 
