@@ -3,7 +3,7 @@ ODIR=../../.tmp/objroot/$(MODULE)
 #TGT=$(ODIR)/lib$(MODULE).a
 TGT=lib$(MODULE).a
 CC=g++
-CC_FLAFS+=-g -std=gnu++0x
+CC_FLAFS+=-g -static-libstdc++ -std=gnu++0x
 
 #FIXME fullpath
 INCS:=-I ../ -I ../$(MODULE)
@@ -30,4 +30,8 @@ clean:
 	rm -f $(ODIR)/*.a
 	
 	
-rebuild: clean install 
+
+unit_test:
+	cd test; make; cd -
+	
+rebuild: clean install unit_test

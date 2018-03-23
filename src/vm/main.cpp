@@ -3,27 +3,19 @@
 #include <iostream>
 
 
+
 int main(int c, char** argv ) 
 {
-	//FIXME check input arguments and count.
-	//test t;
+	//TODO
+	//util::check_args(vm,c,argv);
 	
-	//t.load();
-		
 	LeviVirtualMachine lvm;
+	//lvm.load_file(argv[1]);
+	lvm.load_file("");
 	
-	//try  {
-		lvm.load(argv[0]);
-		//lvm.start();
-		//lvm.stop();
-	//std::cout << "end" << std::endl;
-	//} catch (VMexception d) {
-	//	
-	//
-	//} catch (...) {
-	//	
-	//		
-	//}
-	//lvm.execute("")
+	lvm.start();
+	lvm.stop();
+
+	return 0;	
 	
 }

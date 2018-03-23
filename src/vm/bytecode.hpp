@@ -18,7 +18,9 @@ enum OpCode {
 		JMP,
 		NOP,
 		CMP,
-		INC
+		INC,
+		DEC,
+		JLE
 };		
 
 
@@ -28,6 +30,7 @@ class LBytecode
 {
 
 
+	typedef char dsize;
 	public:		
 		/*
 		LBytecode(bool* bytecode) {
@@ -38,7 +41,7 @@ class LBytecode
 		}
 		/**/
 		
-		LBytecode(OpCode code, bool* data) {
+		LBytecode(OpCode code, dsize* data) {
 			m_opcode = code;
 			m_operands = data;
 			//std::cout << "Adding: "  << static_cast<int>(m_opcode) << std::endl;
@@ -50,18 +53,20 @@ class LBytecode
 			return m_opcode;
 		}
 		
-		bool* get_operands() {
+		dsize* get_operands() {
 			//return 0;
 			return m_operands;
 		}
 
 		void print_debug() {
-			std::cout << "OPCODE(" << opcode_2_string(m_opcode) << "): " << std::endl;
+			std::cout << "BC("<<this <<") ---- " << opcode_2_string(m_opcode) << " " << ( (m_operands)?(*m_operands):0 ) << std::endl;
+			//std::cout << "BC("<<this <<") ---- OPCODE(" << opcode_2_string(m_opcode) << "):   DATA " << m_operands  << std::endl;]
 		}
 		
 
-	private:	
-		std::string opcode_2_string(const OpCode& code) {
+
+		//MOVE TO HELPER or make static
+		static std::string opcode_2_string(const OpCode& code) {
 			std::string r;
 			
 		
@@ -99,6 +104,14 @@ class LBytecode
 				case INC:
 					r = "INC";
 					break;
+
+				case DEC:
+					r = "INC";
+					break;
+
+				case JLE:
+					r = "INC";
+					break;
 					
 				default:
 					r = "UNDEF";
@@ -112,7 +125,7 @@ class LBytecode
 	
 	private:	
 		//std::vector<bool> m_impl;
-		bool* m_operands;
+		dsize* m_operands;
 		OpCode m_opcode;
 
 		
@@ -124,10 +137,13 @@ class LBytecodeIntHelper
 {
 	public:
 		LBytecode create_bytecode(OpCode code, const std::string& arg1, const std::string& arg2) { //, const std::string& arg3) {
-			//std::cout << "create_bytecode -> " << static_cast<int>(code) << std::endl;
+			std::cout << "Create bytecode: -> " << LBytecode::opcode_2_string(code) << ": " <<  arg1 << " " <<  arg2 << std::endl;
 			return LBytecode(code,util::string_2_boolarray(arg1,arg2));
 		}
 	
 };
+
+
+
 
 #endif

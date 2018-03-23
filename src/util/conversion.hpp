@@ -8,6 +8,7 @@
 #include <iostream>
 namespace util {
 		
+	typedef char dsize;
 	
 	std::string dec_2_bin(int number)
 	{
@@ -31,13 +32,13 @@ namespace util {
 	
 	
 	
-	bool* string_2_boolarray(const std::string& str1, const std::string& str2) {
+	dsize* string_2_boolarray(const std::string& str1, const std::string& str2) {
 		//bool* res = 0 ;
 		//std::cout << "BEG:" << "string_2_boolarray" << std::endl;
 		std::string str(str1+str2);
 		int size = str.size(); 
 		//std::cout << "string_2_boolarray: size: "<< size <<" , processing " << str << std::endl;
-		bool* res = new bool[size];
+		dsize* res = new dsize[size];
 		
 		//*	
 		for(int i=0;i<str.size();i++) {
