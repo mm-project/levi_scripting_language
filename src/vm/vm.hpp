@@ -74,7 +74,7 @@ class LeviVirtualMachine
 		}
 		
 		void execute_single_bytecode(LBytecode& b ) {
-			b.print_debug();
+			//b.print_debug();
 			OpCode code = b.get_opcode();
 			dsize* data = b.get_operands();
 			execute_opcode_on_data(code,data);
@@ -125,6 +125,7 @@ class LeviVirtualMachine
 
 		void execute_opcode_on_data(OpCode code, dsize* data ) {
 			//assert( code!=NOP && data &&"execute on null???");
+			std::cout << LBytecode::opcode_2_string(code) << ": " << util::boolarray_2_string(&data[0],3) << " - "<< util::boolarray_2_string(&data[3],3)  << std::endl;
 			switch( code ) {
 
 					case NOP:;
@@ -134,7 +135,7 @@ class LeviVirtualMachine
 					
 					case PNT:
 						//std::cout << "PRINT" << std::endl;
-						std::cout << m_data_regs[*data] << std::endl;
+						std::cout << "****VMPRINT:<" << m_data_regs[util::bin_2_dec(util::boolarray_2_string(&data[0],3))] << ">" << std::endl;
 						break;
 				
 					
@@ -146,17 +147,17 @@ class LeviVirtualMachine
 					//FIXME rewrite
 					case MOV:
 						//bin_2_dec1
-						std::cout << "IMPLEMENT MOV: ---> data* " <<  util::boolarray_2_string(data,5) << std::endl;
-						std::cout << "               			  VALUE: " << util::bin_2_dec(util::boolarray_2_string(&data[0],3)) << " TO REGN: " <<  util::bin_2_dec(util::boolarray_2_string(&data[3],3)) << std::endl;
-						std::cout << "                    			     " << util::boolarray_2_string(&data[0],3) << " TO REGN: " <<  util::boolarray_2_string(&data[3],3) << "."<< std::endl;
+						//std::cout << "IMPLEMENT MOV: ---> data* " <<  util::boolarray_2_string(data,5) << std::endl;
+						//std::cout << "VALUE: " << util::bin_2_dec(util::boolarray_2_string(&data[0],3)) << " TO REGN: " <<  util::bin_2_dec(util::boolarray_2_string(&data[3],3)) << std::endl;
+						//std::cout << "" << util::boolarray_2_string(&data[0],3) << " TO REGN: " <<  util::boolarray_2_string(&data[3],3) << "."<< std::endl;
 						m_data_regs[util::bin_2_dec(util::boolarray_2_string(&data[3],3))]=util::bin_2_dec(util::boolarray_2_string(&data[0],3));
 						break;
 
 
 					case INC:
-						std::cout << "IMPLEMENT INC: ---> " << std::endl;
+						//std::cout << "IMPLEMENT INC: ---> " << std::endl;
 						m_data_regs[util::bin_2_dec(util::boolarray_2_string(&data[0],3))]++;
-						std::cout << "---" << m_data_regs[util::bin_2_dec(util::boolarray_2_string(&data[0],3))] << std::endl;
+						//std::cout << "---" << m_data_regs[util::bin_2_dec(util::boolarray_2_string(&data[0],3))] << std::endl;
 						break;
 						
 

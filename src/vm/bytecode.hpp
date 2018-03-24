@@ -12,6 +12,7 @@
 
 enum OpCode {
 		PNT = 0,
+		JLE,
 		RET,
 		ADD,
 		MOV,
@@ -20,7 +21,7 @@ enum OpCode {
 		CMP,
 		INC,
 		DEC,
-		JLE
+		
 };		
 
 
@@ -59,7 +60,7 @@ class LBytecode
 		}
 
 		void print_debug() {
-			std::cout << "BC("<<this <<") ---- " << opcode_2_string(m_opcode) << " " << ( (m_operands)?(*m_operands):0 ) << std::endl;
+			//std::cout << "BC("<<this <<") ---- " << opcode_2_string(m_opcode) << " " << ( (m_operands)?(*m_operands):0 ) << std::endl;
 			//std::cout << "BC("<<this <<") ---- OPCODE(" << opcode_2_string(m_opcode) << "):   DATA " << m_operands  << std::endl;]
 		}
 		
@@ -110,7 +111,7 @@ class LBytecode
 					break;
 
 				case JLE:
-					r = "INC";
+					r = "JLE";
 					break;
 					
 				default:
