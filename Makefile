@@ -1,69 +1,41 @@
-#MODULES := levi parser vm
-TMP_DIR=.tmp
-YIELD_DIR=$(TMP_DIR)/objroot
-LIBS := $(YIELD_DIR)/interp/libinterp.a $(YIELD_DIR)/parser/libparser.a  
-
+AR=ar
 CC=g++
-CC_FLAFS+= -g -static-libstdc++ -std=gnu++0x
-TGT=bin/leviInterp
-TGT2=bin/leviVM
+RULES_DIR:=./bsys/rules
 
-#FIXME not need to do every time
-deafult: init levi integ
+TMP_DIR:=.tmp
+OBJ_ROOT:=$(TMP_DIR)/objroot
+CODE_BASE_DIR:=src
+TARGET_PREFIX:=lib_levi_
+INCLS:=-I ./include
+CC_FLAFS+=-g -fPIC -std=gnu++0x -static-libstdc++ $(INCLS)
 
+#include $(RULES_DIR)/common.rl
+
+#deps:
+	#./bsys/utils/createIncludeDir.sh
+	
+default: init ./lib/libLeviInterp.so ./bin/leviInterp ./bin/leviVM
+
+#MOVE to module.mk
 init:
-	mkdir -p $(YIELD_DIR)
+	mkdir -p $(OBJ_ROOT)
 	mkdir -p bin
 	mkdir -p lib
 
-deps:
-	./bsys/utils/createIncludeDir.sh
+./lib/libLeviInterp.so: $(OBJ_ROOT)/parser/lib_levi_parser.a 
+	$(CC) $^ -fPIC -shared -o $@
 
-levi: $(LIBS) integ vm
-	$(CC) $(CC_FLAFS) $(YIELD_DIR)/interp/libinterp.a $(YIELD_DIR)/parser/libparser.a  -o $(TGT)
+./bin/leviInterp: $(OBJ_ROOT)/interp/lib_levi_interp.a $(OBJ_ROOT)/parser/lib_levi_parser.a 
+	$(CC) $^ -o $@
+
+./bin/leviVM:  $(OBJ_ROOT)/vm/lib_levi_vm.a 
+	$(CC) $^ -o $@
 	
-	
-vm:
-	cd src/vm; make; cd -
-	$(CC) $(CC_FLAFS) $(YIELD_DIR)/vm/libvm.a -o $(TGT2)
-	
-integ:
-	#cp $(YIELD_DIR)/levi/libparser.a lib/
-	cd src/integ; make; cd -
-	#cp $(YIELD_DIR)/levi/liblevi.a lib/
+
+#Make all the modules as static library
+MODULES:=parser interp vm
+include $(patsubst %,src/%/Module.mk,$(MODULES))
 
 
-$(YIELD_DIR)/interp/libinterp.a: 
-	cd src/interp; make; cd -
-	
-$(YIELD_DIR)/parser/libparser.a: 
-	cd src/parser; make; cd -
-	cp $(YIELD_DIR)/parser/libparser.a lib/
-	
-$(YIELD_DIR)/vm/libvm.a: 
-	cd src/vm; make; cd -
 
-	
-clean:
-	rm -rf $(TMP_DIR)
-	rm -rf $(YIELD_DIR)
-	rm -f bin/*
-	rm -rf doc/examples/bin
-	rm -rf lib/*
-	rm -rf include
-	rm -f test/unit/tests/*
-	rm -f `find -name "*.o"`
-	rm -f `find -name "*.a"`
-	
-unit_tests:
-	mkdir -p test/unit/tests
-	cd src/parser; make unit_test; cd -
-	cd src/vm; make unit_test; cd -
-	cd src/integ; make unit_test; cd -
-	
-examples:
-	cd doc/examples; make ; cd -
-	
-	
-rebuild: clean init deps levi unit_tests examples
 
