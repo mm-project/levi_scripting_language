@@ -11,6 +11,7 @@ BIN_DIR:=$(ROOT_DIR)/bin
 LIB_DIR:=$(ROOT_DIR)/lib
 EXAMPLES_DIR:=$(ROOT_DIR)/docs/examples
 EXAMPLES_BIN_DIR:=$(EXAMPLES_DIR)/bin
+UNITTEST_BIN_DIR:=$(ROOT_DIR)/test/unit/tests
 
 INC_DIR:=$(ROOT_DIR)/include
 
