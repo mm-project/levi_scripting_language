@@ -29,7 +29,7 @@ fi
 
 
 echo "*******************************************************************************Compilation"
-make rebuild
+make 
 msta=$?
 if [ "$msta" != "0" ]; then
 	echo "Compilation failed"
