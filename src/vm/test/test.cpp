@@ -45,7 +45,7 @@ void test(AsmProg* prg) {
 
 int main() 
 {
-	test(new WhileAsmProg);
+	//test(new WhileAsmProg);
 	//test(new FibonaciAsmProg);
 	//test(new FactorialAsmProg);
 	
