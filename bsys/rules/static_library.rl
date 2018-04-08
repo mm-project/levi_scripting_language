@@ -28,6 +28,6 @@ $(MODULE_OBJ_ROOT)/%.o: $(MODULE_CODE_DIR)/%.cpp
 		
 #FIXME		
 $(MODULE_OBJ_ROOT)/%.d: $(MODULE_CODE_DIR)/%.cpp 
-	$(CC) $(LOCAL_CC_FLAG) $(LOCAL_INCS) $<  -MM -MT $(@:.d=.o) > $@
+	$(CC) $< $(LOCAL_CC_FLAG) $(LOCAL_INCS)  -MM -MT $(@:.d=.o) > $@
 
 

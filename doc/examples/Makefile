@@ -2,15 +2,16 @@ deafult: init examples
 
 init:
 	mkdir -p bin
-	#cd bin; ln -s ../../lib/liblevi_interp.so . ; cd -
-
+	mkdir -p lib
 	
+#FIXME do automation for each example !	
 examples:
-	cd ex1; make ; cd -
-	cd ex2; make ; cd -
+	$(MAKE) -C ex1
+	$(MAKE) -C ex2
 	
 clean:
-	cd ex1; make clean; cd -
-	cd ex2; make clean; cd -
+	$(MAKE) -C ex1
+	$(MAKE) -C ex2
+	
 
 	

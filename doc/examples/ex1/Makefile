@@ -1,4 +1,5 @@
 
+
 MODULE=ex1
 TEST=$(MODULE)
 TGT=../bin/$(TEST)
@@ -8,15 +9,16 @@ CC_FLAFS=-g -static-libstdc++ -std=gnu++0x
 
 INCS:=-I ../../../include
 LIB_PATH:=../../../lib
-#LIBS:=$(LIB_PATH)/liblevi_interp.so
-LIBS:=-llevi_interp
+LNAME=leviInterp
+LIBS:=$(LIB_PATH)/lib$(LNAME).so
+#LIBS:=-l$(LNAME)
 
 
 SRCS:=$(wildcard *.cpp)
 OBJS:=$(SRCS:.cpp=.o)
 
 %.o : %.cpp
-		$(CC) $(CC_FLAFS) $(INCS) $< -c -o $@ 
+		$(CC) $(CC_FLAFS) $< $(INCS) -c -o $@ 
 
 default: $(OBJS)
 		$(CC) $(CC_FLAFS) $^ -L $(LIB_PATH) $(LIBS) -o $(TGT)

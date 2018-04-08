@@ -13,7 +13,7 @@
 
 Interpreter::Interpreter(): m_globals(new Environment())
 {
-        m_globals->define("time", Value(new ClockFunction()));
+			m_globals->define("time", Value(new ClockFunction()));
         m_environment = m_globals;
 }
 
