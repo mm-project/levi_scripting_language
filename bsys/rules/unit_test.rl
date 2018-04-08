@@ -8,8 +8,8 @@ TEST_OBJS:=$(patsubst $(TEST_CODE_DIR)/%,$(OBJ_ROOT)/$(MODULE)/test/%,$(OBJS1))
 TEST_DEPS:=$(TEST_OBJS:.o=.d)
 
 TEST_LOCAL_CC_FLAG:=$(CC_FLAFS) 
-TEST_LOCAL_INCS:=$(LOCAL_INCS) -I ./ext/catch-2.1.2
-TEST_LOCAL_LIB:=$(LOCAL_LIBS)
+TEST_LOCAL_INCS:=$(LOCAL_INCS_FIXME) -I ./ext/catch-2.1.2
+TEST_LOCAL_LIB:=$(LOCAL_LIBS_FIXME)
 
 
 $(shell mkdir -p $(OBJ_ROOT)/$(MODULE)/test)
@@ -20,7 +20,7 @@ $(TEST_NAME):  $(TEST_TARGET)
 
 	
 $(TEST_TARGET): $(TEST_OBJS) 
-	$(CC) $^ $(TEST_LOCAL_LIB) -o $@ 
+	$(CC) $^ $(TEST_LOCAL_LIB) $(LD_FLAFS) -o $@ 
 
 -include $(TEST_DEPS)
 

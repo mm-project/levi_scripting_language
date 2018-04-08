@@ -8,11 +8,11 @@ include bsys/rules/common.rl
 ./lib/libLeviInterp.so: $(OBJ_ROOT)/integ/lib_levi_integ.a $(OBJ_ROOT)/parser/lib_levi_parser.a 
 	$(CC) $(OBJ_ROOT)/integ/levi_interp.o $^ $(LD_FLAFS) -fPIC -shared -o $@
 
-#./bin/leviInterp: $(OBJ_ROOT)/interp/lib_levi_interp.a $(OBJ_ROOT)/parser/lib_levi_parser.a 
-#	$(CC) $^ $(LD_FLAFS) -o $@
+./bin/leviInterp: $(OBJ_ROOT)/interp/lib_levi_interp.a $(OBJ_ROOT)/parser/lib_levi_parser.a 
+	$(CC) $^ $(LD_FLAFS) -o $@
 
-#./bin/leviVM:  $(OBJ_ROOT)/vm/lib_levi_vm.a 
-#	$(CC) $^ $(LD_FLAFS) -o $@
+./bin/leviVM:  $(OBJ_ROOT)/vm/lib_levi_vm.a 
+	$(CC) $^ $(LD_FLAFS) -o $@
 
 
 .PHONY: init
@@ -48,12 +48,12 @@ rebuild: clean init deps all unit_tests examples
 
 #Make all the modules as static library	
 MODULES:=integ parser vm interp
-#TESTS:=$(patsubst %,%Test,$(MODULES))
+TESTS:=$(patsubst %,%Test,$(MODULES))
 include $(patsubst %,src/%/Module.mk,$(MODULES))
 
 #FIXME
-TOTESTS:=parser vm integ
-TESTS:=$(patsubst %,%Test,$(TOTESTS))
+#TOTESTS:=parser vm integ interp
+#TESTS:=$(patsubst %,%Test,$(TOTESTS))
 .PHONY: unit_tests
 unit_tests: $(TESTS)
 

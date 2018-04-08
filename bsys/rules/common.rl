@@ -29,6 +29,6 @@ $(shell mkdir -p $(EXAMPLES_BIN_DIR))
 
 
 INCLS:=-I $(INC_DIR)
-CC_FLAFS+=-g -std=gnu++0x 
-#CC_FLAFS+=-g -fPIC -std=gnu++0x 
-LD_FLAFS+=-static-libstdc++
+CC_FLAFS:=-g -fPIC -std=gnu++0x -I $(INC_DIR)
+#CC_FLAFS:=-g -fPIC -std=gnu++0x 
+LD_FLAFS:=-static-libstdc++

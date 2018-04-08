@@ -20,8 +20,8 @@ fatal_fails=0
 
 mkdir -p $out_dir
 cd $out_dir
-#FIXME workaround
-#cp $BUILD_PATH/lib/* ./
+#FIXME windows workaround
+cp $BUILD_PATH/lib/* ./
 
 for test in `ls $tests_dir`; do
 	total=`expr $total + 1`
