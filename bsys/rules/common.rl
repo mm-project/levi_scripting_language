@@ -27,8 +27,8 @@ $(shell mkdir -p $(BIN_DIR))
 $(shell mkdir -p $(LIB_DIR))
 $(shell mkdir -p $(EXAMPLES_BIN_DIR))
 
-
+#FIXME issue , not possible to use vars in different modules seperatly
 INCLS:=-I $(INC_DIR)
-CC_FLAFS:=-g -fPIC -std=gnu++0x -I $(INC_DIR)
+CC_FLAFS:=-g -fPIC -std=gnu++0x -I $(INC_DIR) -I ./ext/catch-2.1.2
 #CC_FLAFS:=-g -fPIC -std=gnu++0x 
 LD_FLAFS:=-static-libstdc++

@@ -2,7 +2,7 @@ deafult: init examples
 
 init:
 	mkdir -p bin
-	mkdir -p lib
+	#mkdir -p lib
 	
 #FIXME do automation for each example !	
 examples:

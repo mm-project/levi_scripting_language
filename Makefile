@@ -1,7 +1,7 @@
 include bsys/rules/common.rl
 
 
-#all: ./lib/libLeviInterp.so ./bin/leviInterp ./bin/leviVM
+all: ./lib/libLeviInterp.so ./bin/leviInterp ./bin/leviVM
 	
 #fimxe first target should be object file for shared library
 #or give other rule for shared library	

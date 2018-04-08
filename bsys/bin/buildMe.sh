@@ -18,7 +18,8 @@ chmod 777 -R ./doc/*
 #chmod 777 ./test/unit/runUnitTests.sh
 #chmod 777 ./test/unit/tests/*
 #chmod 777 ./bsys/utils/runTests.sh
-
+echo
+echo
 echo "*******************************************************************************Dependency generation"
 make deps
 msta=$?
@@ -27,7 +28,8 @@ if [ "$msta" != "0" ]; then
 	exit 1
 fi
 
-
+echo
+echo
 echo "*******************************************************************************Compilation"
 make 
 msta=$?
@@ -36,6 +38,8 @@ if [ "$msta" != "0" ]; then
 	exit 1
 fi
 
+echo
+echo
 echo "*******************************************************************************Compilation (unit-tests)"
 make unit_tests
 musta=$?
@@ -44,9 +48,9 @@ if [ "$musta" != "0" ]; then
 	exit 1
 fi
 
+echo
+echo
 echo "*******************************************************************************Testing"
-
-
 runTests.sh
 rtsta=$?
 if [ "$rtsta" != "0" ]; then
@@ -54,7 +58,8 @@ if [ "$rtsta" != "0" ]; then
 	exit 1
 fi
 
-
+echo
+echo
 echo "*******************************************************************************Making examples"
 make examples
 msta=$?
@@ -63,6 +68,8 @@ if [ "$msta" != "0" ]; then
 	exit 1
 fi
 
+echo
+echo
 echo "*******************************************************************************Running examples"
 #FIXME
 #make examples
