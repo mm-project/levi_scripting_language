@@ -9,7 +9,7 @@ CC_FLAFS=-g -static-libstdc++ -std=gnu++0x
 
 INCS:=-I ../../../include
 LIB_PATH:=../../../lib
-LNAME=leviInterp
+LNAME=LeviInterp
 #LIBS:=$(LIB_PATH)/lib$(LNAME).so
 LIBS:=-l$(LNAME)
 
