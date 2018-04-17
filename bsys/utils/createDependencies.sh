@@ -10,3 +10,9 @@ case "$DIR" in
 	gcc -MM -MG "$@" | sed -e "s@ˆ\(.*\)\.o:@$DIR/\1.d \$DIR/\1.o:@"
 	;;
 esac
+
+for last; do true; done
+obj=`echo $last | sed -e "s/\.cpp/\.o/"`
+obj=`echo $obj | sed -e "s/src\///"`
+
+echo -e "\t g++ -c $CFLAGS $last -o .tmp/objroot/$obj"

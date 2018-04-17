@@ -1,0 +1,18 @@
+-integ
+	interlayer project for providing c++ API to levi through shared library
+	
+-interp
+	levi runtime interpeter application
+	
+-parser
+	parser that used in other public modules
+	
+-util
+	utilty classes and functions accessable by public modules
+	
+-vm
+	levi virtual machine
+	
+	
+ 
+	

@@ -1,0 +1,5 @@
+parser:static:libParser.a
+util:static:libParser.a
+vm:executable:vmLevi
+integ:shared:libLeviInteg.so
+interp:executable:interpLevi

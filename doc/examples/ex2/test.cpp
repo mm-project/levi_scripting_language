@@ -10,6 +10,6 @@ int main(int argc, char** argv)
     "    return fibonacci(n - 2) + fibonacci(n - 1);"
 	"}"
 	""
-	"print fibonacci(20); ");
+	"print fibonacci(20);");
 	
 }
