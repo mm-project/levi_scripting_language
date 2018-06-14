@@ -143,4 +143,37 @@ private:
         std::vector<Stmt*> m_body;
 };
 
+class GetExpr : public Expr
+{
+public:
+        friend class Interpreter;
+        friend class Parser;
+
+        GetExpr(Expr* expr, Token name)
+                : m_expr(expr), m_name(name)
+        {}
+
+        virtual void accept(ExprVisitor*);
+
+private:
+        Expr* m_expr;
+        Token m_name;
+};
+
+class SetExpr : public Expr
+{
+public:
+        friend class Interpreter;
+
+        SetExpr(Expr* object, Token name, Expr* expr)
+                : m_object(object), m_name(name), m_value(expr)
+        {}
+
+        virtual void accept(ExprVisitor*);
+
+private:
+        Expr* m_object;
+        Token m_name;
+        Expr* m_value;
+};
 #endif

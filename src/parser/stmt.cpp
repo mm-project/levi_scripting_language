@@ -41,3 +41,8 @@ void ReturnStmt::accept(StmtVisitor* v)
 {
         v->visitReturnStmt(this);
 }
+
+void ClassStmt::accept(StmtVisitor* v)
+{
+        v->visitClassStmt(this);
+}

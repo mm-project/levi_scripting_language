@@ -6,12 +6,14 @@
 
 #include "token.hpp"
 
+/// @class Scanner
 class Scanner {
 public:
 	//Scanner(std::string source):source(source), start(0), current(0), line(1) {}
 
         Scanner() : line(1) {}
 	std::vector<Token> scan_tokens(std::string);
+
 private:
 	void scan_token();
 	bool is_at_end();

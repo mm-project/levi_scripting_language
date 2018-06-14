@@ -13,6 +13,8 @@ class AssignExpr;
 class LogicalExpr;
 class CallExpr;
 class FunctionExpr;
+class GetExpr;
+class SetExpr;
 
 class ExpressionStmt;
 class PrintStmt;
@@ -22,7 +24,9 @@ class IfStmt;
 class WhileStmt;
 class FunctionStmt;
 class ReturnStmt;
+class ClassStmt;
 
+/// @class Expression Visitor
 class ExprVisitor
 {
 public:
@@ -35,8 +39,11 @@ public:
         virtual void visitLogicalExpr(LogicalExpr*) = 0;
         virtual void visitCallExpr(CallExpr*) = 0;
         virtual void visitFunctionExpr(FunctionExpr*) = 0;
+        virtual void visitGetExpr(GetExpr*) = 0;
+        virtual void visitSetExpr(SetExpr*) = 0;
 };
 
+/// @class Statement Visitor
 class StmtVisitor
 {
 public:
@@ -48,6 +55,7 @@ public:
         virtual void visitWhileStmt(WhileStmt*) = 0;
         virtual void visitFunctionStmt(FunctionStmt*) = 0;
         virtual void visitReturnStmt(ReturnStmt*) = 0;
+        virtual void visitClassStmt(ClassStmt*) = 0;
 };
 
 #endif

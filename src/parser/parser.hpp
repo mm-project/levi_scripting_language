@@ -9,10 +9,12 @@
 #include <string>
 #include <iostream>
 
+/// @class Parser
 class Parser {
 public:
 	Parser() {m_current = 0;}
         std::vector<Stmt*> parse(std::vector<Token> t);
+
 private:
         Expr* assignment();
 	Expr* expression();
@@ -41,6 +43,7 @@ private:
         Stmt* forStatement();
         Stmt* functionDeclaration(std::string);
         Stmt* returnStmt();
+        Stmt* classDeclaration();
 
 	bool match(Token_type type = EOF_, Token_type type2 = EOF_, Token_type type3 = EOF_, Token_type type4 = EOF_);
 	bool check(Token_type);

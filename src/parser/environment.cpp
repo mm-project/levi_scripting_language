@@ -1,5 +1,5 @@
 #include "environment.hpp"
- 
+
 #include "error.hpp"
 
 #include <iostream>
@@ -10,12 +10,12 @@ Environment::Environment() :enclosing(0)
 Environment::Environment(Environment* e) : enclosing(e)
 {}
 
-void Environment::define(std::string name, Value var)
+void Environment::define(const std::string& name, Value value)
 {
-        m_variables[name] = var;
+        m_variables[name] = value;
 }
 
-Value Environment::get_variable(std::string name)
+Value Environment::get_variable(const std::string& name)
 {
         auto search = m_variables.find(name);
         if (search != m_variables.end()) {
@@ -27,18 +27,17 @@ Value Environment::get_variable(std::string name)
         throw Runtime_error("Undefined variable " + name + ".");
 }
 
-void Environment::assign(Token name, Value v)
+void Environment::assign(const std::string& name, Value value)
 {
-        std::string n = name.lexeme;
-        auto search = m_variables.find(n);
+        auto search = m_variables.find(name);
         if (search != m_variables.end()) {
-                m_variables[n] = v;
+                m_variables[name] = value;
                 return;
         }
         if (enclosing) {
-                enclosing->assign(name, v);
+                enclosing->assign(name, value);
                 return;
         }
-        throw Runtime_error("Undefined reference " + n + ".");
+        throw Runtime_error("Undefined reference " + name + ".");
 }
 

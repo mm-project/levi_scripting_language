@@ -3,18 +3,29 @@
 
 #include "callable.hpp"
 
-#include "expr.hpp"
-#include "environment.hpp"
+class FunctionExpr;
+class Environment;
 
+/// @brief class Funtion
 class Function : public Callable
 {
 public:
-        Function(FunctionExpr*, Environment*, bool, std::string = "");
+        /// @brief Constructor
+        /// param [in] declaration The function declaration
+        /// param [in] environ The function environment
+        /// param [in] name The funtion name
+        Function(FunctionExpr* declaration, Environment* eviron, bool, std::string name = "");
 
-        virtual Value call(Interpreter* inter, std::vector<Value> args);
+public:
+        /// @brief Calls the funtion
+        /// @param [in] inter The Interpreter
+        /// @param [in] args The arguments of the funtion
+        virtual Value call(Interpreter* inter, const std::vector<Value>& args);
 
+        /// @brief Retruns parameters size
         virtual int arity();
 
+        /// @brief Gets the funtion name
         virtual std::string toString();
 
 private:

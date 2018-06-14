@@ -79,6 +79,8 @@ void Scanner::identifier()
                 tokens.push_back(Token(FUNCTION, text, line));
         } else if (text == "return") {
                 tokens.push_back(Token(RETURN, text, line));
+        } else if (text == "class") {
+                tokens.push_back(Token(CLASS, text, line));
         } else {
                 tokens.push_back(Token(IDENTIFIER,text, line) );
         }
@@ -88,7 +90,7 @@ void Scanner::string()
 {
 	while (peek() != '"' && !is_at_end()) advance();
 	if (is_at_end()) {
-		std::cout <<" Error" <<std::endl;
+		std::cout <<"Error" <<std::endl;
 		return;
 	}
 	advance();
@@ -131,7 +133,7 @@ void Scanner::scan_token()
 			} else if (isAlpha(c) || c == '_') {
 				identifier();
 			} else {
-				std::cout <<"EROOR" << std::endl;
+				std::cout <<"ERROR" << std::endl;
 			}
 	}
 }

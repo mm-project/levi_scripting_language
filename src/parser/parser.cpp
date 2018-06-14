@@ -68,6 +68,9 @@ Expr* Parser::assignment()
                 if (dynamic_cast<VariableExpr*>(expr)) {
                         Token name = dynamic_cast<VariableExpr*>(expr)->get_name();
                         return new AssignExpr(name, value);
+                } else if (dynamic_cast<GetExpr*>(expr)) {
+                        GetExpr* get_expr = static_cast<GetExpr*>(expr);
+                        return new SetExpr(get_expr->m_expr, get_expr->m_name, value);
                 }
                 // report error
         }
@@ -158,7 +161,10 @@ Expr* Parser::call()
         while (true) {
                 if (match(LEFT_PAREN)) {
                         e = finishCall(e); //TODO: add identifier
-                } else {
+                } else if (match(DOT)) {
+                        Token name = consume(IDENTIFIER, "Expect property name after '.'.");
+                        return new GetExpr(e, name);
+                }else {
                         break;
                 }
         }
@@ -280,6 +286,7 @@ Stmt* Parser::expressionStmt()
 Stmt* Parser::declaration()
 {
         try {
+                if (match(CLASS)) return classDeclaration();
                 if (match(FUNCTION)) return functionDeclaration("function");
                 if (match(VAR)) return varDeclaration();
                 return statement();
@@ -292,8 +299,7 @@ Stmt* Parser::declaration()
 
 Stmt* Parser::functionDeclaration(std::string s)
 {
-        Token name = consume(IDENTIFIER, "");
-
+        Token name = consume(IDENTIFIER, "Expect function name.");
         FunctionExpr* fexpr = static_cast<FunctionExpr*>(_function(s));
         return new FunctionStmt(name, fexpr);
 }
@@ -422,3 +428,16 @@ Stmt* Parser::returnStmt()
         consume(SEMICOLON, "Expected ';' after return.");
         return new ReturnStmt(name, value);
 }
+
+Stmt* Parser::classDeclaration()
+{
+        Token name = consume(IDENTIFIER, "Expect class name.");
+        consume(LEFT_BRACE, "Expect '{' before class body.");
+        std::vector<FunctionStmt*> methods;
+        while (!check(RIGHT_BRACE) && !is_at_end()) {
+                methods.push_back(static_cast<FunctionStmt*>(functionDeclaration("method")));
+        }
+        consume(RIGHT_BRACE, "Expect '}' after class body.");
+        return new ClassStmt(name, methods);
+}
+

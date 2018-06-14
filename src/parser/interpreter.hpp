@@ -12,6 +12,7 @@
 class Stmt;
 class Environment;
 
+/// @class Interpreter
 class Interpreter : public ExprVisitor, public StmtVisitor
 {
 public:
@@ -21,26 +22,29 @@ public:
 
         std::string interpreter(Expr*);
 
-        virtual void visitBinary(Binary*);
-        virtual void visitLiteral(Literal*);
-	virtual void visitGrouping(Grouping*);
-	virtual void visitUnary(Unary*);
-        virtual void visitVariableExpr(VariableExpr*);
-        virtual void visitAssignExpr(AssignExpr*);
-        virtual void visitLogicalExpr(LogicalExpr*);
-        virtual void visitCallExpr(CallExpr*);
-        virtual void visitFunctionExpr(FunctionExpr*);
+        virtual void visitBinary(Binary*) override;
+        virtual void visitLiteral(Literal*) override;
+	virtual void visitGrouping(Grouping*) override;
+	virtual void visitUnary(Unary*) override;
+        virtual void visitVariableExpr(VariableExpr*) override;
+        virtual void visitAssignExpr(AssignExpr*) override;
+        virtual void visitLogicalExpr(LogicalExpr*) override;
+        virtual void visitCallExpr(CallExpr*) override;
+        virtual void visitFunctionExpr(FunctionExpr*) override;
+        virtual void visitGetExpr(GetExpr*) override;
+        virtual void visitSetExpr(SetExpr*) override;
 
         void execute(Stmt*);
 
-        virtual void visitExpressionStmt(ExpressionStmt*);
-        virtual void visitPrintStmt(PrintStmt*);
-        virtual void visitVarStmt(VarStmt*);
-        virtual void visitBlockStmt(BlockStmt*);
-        virtual void visitIfStmt(IfStmt*);
-        virtual void visitWhileStmt(WhileStmt*);
-        virtual void visitFunctionStmt(FunctionStmt*);
-        virtual void visitReturnStmt(ReturnStmt*);
+        virtual void visitExpressionStmt(ExpressionStmt*) override;
+        virtual void visitPrintStmt(PrintStmt*) override;
+        virtual void visitVarStmt(VarStmt*) override;
+        virtual void visitBlockStmt(BlockStmt*) override;
+        virtual void visitIfStmt(IfStmt*) override;
+        virtual void visitWhileStmt(WhileStmt*) override;
+        virtual void visitFunctionStmt(FunctionStmt*) override;
+        virtual void visitReturnStmt(ReturnStmt*) override;
+        virtual void visitClassStmt(ClassStmt*) override;
 
         void executeBlock(std::vector<Stmt*>, Environment*);
 private:

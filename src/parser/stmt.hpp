@@ -133,4 +133,19 @@ private:
         Expr* m_value;
 };
 
+class ClassStmt : public Stmt
+{
+public:
+        friend class Interpreter;
+
+        ClassStmt(Token name, const std::vector<FunctionStmt*>& methods)
+                : m_name(name), m_methods(methods)
+        {}
+
+        virtual void accept(StmtVisitor*);
+
+private:
+        Token m_name;
+        std::vector<FunctionStmt*> m_methods;
+};
 #endif

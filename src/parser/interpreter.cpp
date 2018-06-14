@@ -1,11 +1,13 @@
 #include "interpreter.hpp"
 
+#include "class_instance.hpp"
 #include "environment.hpp"
 #include "expr.hpp"
 #include "error.hpp"
 #include "stmt.hpp"
 #include "native_functions.hpp"
 #include "callable.hpp"
+#include "class.hpp"
 #include "function.hpp"
 #include "return.hpp"
 
@@ -13,7 +15,7 @@
 
 Interpreter::Interpreter(): m_globals(new Environment())
 {
-			m_globals->define("time", Value(new ClockFunction()));
+        m_globals->define("time", Value(new ClockFunction()));
         m_environment = m_globals;
 }
 
@@ -203,7 +205,7 @@ void Interpreter::visitAssignExpr(AssignExpr* e)
 {
         Value value = evaluate(e->m_value);
         try {
-                m_environment->assign(e->m_name, value);
+                m_environment->assign(e->m_name.lexeme, value);
                 m_value = value;
         } catch (Runtime_error& e) {
                 std::cout << e.what() << std::endl;
@@ -310,3 +312,29 @@ void Interpreter::visitReturnStmt(ReturnStmt* e)
         }
         throw Return(value);
 }
+
+void Interpreter::visitClassStmt(ClassStmt* e)
+{
+        Class* klass = new Class(e->m_name.lexeme);
+        m_environment->define(e->m_name.lexeme, Value(klass));
+}
+
+void Interpreter::visitGetExpr(GetExpr* e)
+{
+        Value object = evaluate(e);
+        if (object.is_instance()) {
+                m_value = object.get_instance()->get(e->m_name);
+        }
+        throw Runtime_error("Only instances have properties.");
+}
+
+void Interpreter::visitSetExpr(SetExpr* e)
+{
+        Value object = evaluate(e->m_object);
+        if (object.is_instance()) {
+                m_value = evaluate(e->m_value);
+                object.get_instance()->set(e->m_name, m_value);
+        }
+        throw Runtime_error("Only instances have properties.");
+}
+

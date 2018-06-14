@@ -47,3 +47,14 @@ void FunctionExpr::accept(ExprVisitor* v)
 {
         v->visitFunctionExpr(this);
 }
+
+void GetExpr::accept(ExprVisitor* v)
+{
+        v->visitGetExpr(this);
+}
+
+void SetExpr::accept(ExprVisitor* v)
+{
+        v->visitSetExpr(this);
+}
+
