@@ -163,8 +163,8 @@ Expr* Parser::call()
                         e = finishCall(e); //TODO: add identifier
                 } else if (match(DOT)) {
                         Token name = consume(IDENTIFIER, "Expect property name after '.'.");
-                        return new GetExpr(e, name);
-                }else {
+                        e = new GetExpr(e, name);
+                } else {
                         break;
                 }
         }
@@ -182,6 +182,10 @@ Expr* Parser::finishCall(Expr* callee)
         }
         //TODO: add max arguments checking
         Token paren = consume(RIGHT_PAREN, "Expect ')' apter arguments.");
+        FunctionExpr* func = static_cast<FunctionExpr*>(callee);
+        if (func->parameters_size() != arguments.size()) {
+                //throw Error;
+        }
         return new CallExpr(callee, paren, arguments);
 }
 
@@ -435,6 +439,7 @@ Stmt* Parser::classDeclaration()
         consume(LEFT_BRACE, "Expect '{' before class body.");
         std::vector<FunctionStmt*> methods;
         while (!check(RIGHT_BRACE) && !is_at_end()) {
+                //advance(); // check need this here?
                 methods.push_back(static_cast<FunctionStmt*>(functionDeclaration("method")));
         }
         consume(RIGHT_BRACE, "Expect '}' after class body.");

@@ -3,12 +3,19 @@
 
 #include "callable.hpp"
 
+#include <map>
+
+class Class_Instance;
+class Function;
+
 /// @class Class
 class Class : public Callable
 {
 public:
         /// @brief Constructor
-        Class(const std::string& name);
+        /// @param name The name
+        /// @param methods The methods
+        Class(const std::string& name, const std::map<std::string, Function*>& methods);
 public:
         /// @brief Calls the funtion
         /// @param [in] inter The Interpreter
@@ -21,8 +28,13 @@ public:
         /// @brief Gets the funtion name
         virtual std::string toString();
 
+        /// @brief Finds the method with the given name
+        /// @param instance The instance
+        /// @param name The method name
+        Function* find_method(Class_Instance* instance, const std::string& name);
 private:
         std::string m_name;
+        std::map<std::string, Function*> m_methods;
 };
 
 #endif

@@ -138,6 +138,8 @@ public:
                 : m_parameters(t), m_body(s) {}
 
         virtual void accept(ExprVisitor*);
+
+        size_t parameters_size() const { return m_parameters.size();}
 private:
         std::vector<Token> m_parameters;
         std::vector<Stmt*> m_body;

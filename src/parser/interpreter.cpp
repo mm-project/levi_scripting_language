@@ -315,17 +315,23 @@ void Interpreter::visitReturnStmt(ReturnStmt* e)
 
 void Interpreter::visitClassStmt(ClassStmt* e)
 {
-        Class* klass = new Class(e->m_name.lexeme);
+        std::map<std::string, Function*> methods;
+        for (auto it = e->m_methods.begin(); it != e->m_methods.end(); ++it) {
+                Function* function = new Function((*it)->m_declaration, m_environment, false);
+                methods[e->m_name.lexeme] = function;
+        }
+        Class* klass = new Class(e->m_name.lexeme, methods);
         m_environment->define(e->m_name.lexeme, Value(klass));
 }
 
 void Interpreter::visitGetExpr(GetExpr* e)
 {
-        Value object = evaluate(e);
+        Value object = evaluate(e->m_expr);
         if (object.is_instance()) {
                 m_value = object.get_instance()->get(e->m_name);
+                return;
         }
-        throw Runtime_error("Only instances have properties.");
+        throw Runtime_error("Get - Only instances have properties.");
 }
 
 void Interpreter::visitSetExpr(SetExpr* e)
@@ -334,7 +340,8 @@ void Interpreter::visitSetExpr(SetExpr* e)
         if (object.is_instance()) {
                 m_value = evaluate(e->m_value);
                 object.get_instance()->set(e->m_name, m_value);
+                return;
         }
-        throw Runtime_error("Only instances have properties.");
+        throw Runtime_error("Set - Only instances have properties.");
 }
 

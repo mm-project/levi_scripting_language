@@ -1,0 +1,14 @@
+class Cake 
+{      
+}
+
+function A()
+{
+        return "Hey";
+}
+
+var c = Cake();
+c.func = "AA";
+print c.func;
+c.func = A;
+print c.func();
