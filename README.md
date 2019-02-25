@@ -14,17 +14,6 @@ It's on-going project and there are plans to add virtual machine so parser backe
 #### Usage
 `./bin/levi <filename>`
 
-#### Supported OS
-* Linux
-* Windows
-
-#### Build steps
-##### Linux
-* todo
-
-##### Windows
-* todo
-
 #### Examples
 
 Hanoi Game
@@ -79,7 +68,16 @@ int main(int argc, char** argv)
 }
 ```
 
+#### Supported OS
+* Linux
+* Windows
 
+#### Build steps
+##### Linux
+* todo
+
+##### Windows
+* todo
 
 [![Build Status](https://travis-ci.org/nagaina/diploma.svg?branch=master)](https://travis-ci.org/nagaina/diploma)
 
