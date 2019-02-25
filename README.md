@@ -14,15 +14,15 @@ It's on-going project and there are plans to add virtual machine so parser backe
 #### Usage
 `./bin/levi <filename>`
 
-### Supported OS
+#### Supported OS
 * Linux
 * Windows
 
 #### Build steps
-###### Linux
+##### Linux
 * todo
 
-###### Windows
+##### Windows
 * todo
 
 #### Examples
