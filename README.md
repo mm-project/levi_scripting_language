@@ -1,3 +1,6 @@
+
+[![Build Status](https://travis-ci.org/nagaina/diploma.svg?branch=master)](https://travis-ci.org/nagaina/diploma)
+
 # "levi" general purpose scripting language
 
 Yes, Yet another scripting language.
@@ -79,6 +82,5 @@ int main(int argc, char** argv)
 ##### Windows
 * todo
 
-[![Build Status](https://travis-ci.org/nagaina/diploma.svg?branch=master)](https://travis-ci.org/nagaina/diploma)
 
 
