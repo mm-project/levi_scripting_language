@@ -2,9 +2,9 @@
 #define LEVI_INTERP_HPP
 
 
-#include <parser/scanner.hpp>
-#include <parser/parser.hpp>
-#include <parser/interpreter.hpp>
+#include "../parser/scanner.hpp"
+#include "../parser/parser.hpp"
+#include "../parser/interpreter.hpp"
 
 #include <string>
 

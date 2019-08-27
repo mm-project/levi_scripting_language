@@ -2,11 +2,11 @@
 #include <fstream>
 #include <sstream>
 
-#include <parser/scanner.hpp>
-#include <parser/parser.hpp>
-#include <parser/interpreter.hpp>
+#include "../parser/scanner.hpp"
+#include "../parser/parser.hpp"
+#include "../parser/interpreter.hpp"
 
-#include <util/fileio.hpp>
+#include "../util/fileio.hpp"
 
 void run_file(const std::string& filename)
 {

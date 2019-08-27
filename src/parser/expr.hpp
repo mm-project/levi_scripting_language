@@ -123,7 +123,7 @@ public:
         virtual void accept(ExprVisitor*);
 
 private:
-        Expr* m_callee;
+        Expr* m_callee = nullptr;
         Token m_paren;
         std::vector<Expr*> m_arguments;
 };

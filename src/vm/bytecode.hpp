@@ -8,7 +8,7 @@
 #include <string>
 #include <cassert>
 
-#include <util/conversion.hpp>
+#include "../util/conversion.hpp"
 
 enum OpCode {
 		PNT = 0,

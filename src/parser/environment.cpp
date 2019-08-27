@@ -1,6 +1,7 @@
 #include "environment.hpp"
 
 #include "error.hpp"
+#include "commands.hpp"
 
 #include <iostream>
 
@@ -17,6 +18,12 @@ void Environment::define(const std::string& name, Value value)
 
 Value Environment::get_variable(const std::string& name)
 {
+        // lookup registerd commands
+        CommandPool& commands = CommandPool::getInstance();
+        auto cm = commands.findCommand(name);
+        if (cm != nullptr)
+            return cm;
+
         auto search = m_variables.find(name);
         if (search != m_variables.end()) {
                 return search->second;

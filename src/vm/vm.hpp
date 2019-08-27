@@ -178,7 +178,7 @@ class LeviVirtualMachine
 					
 					case JMP:
 						//assert(!data&&"JMP TO NULL")
-						m_ip = reinterpret_cast<dsize>(*data);
+						//m_ip = reinterpret_cast<dsize>(*data);
 						break;
 						
 						

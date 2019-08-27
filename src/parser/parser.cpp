@@ -199,7 +199,7 @@ Expr* Parser::primary()
      		 return new Literal(Value(std::stod(previous().lexeme)));
     	}
         if (match(STRING)) {
-                        return new Literal(Value(previous().lexeme));
+                return new Literal(Value(previous().lexeme));
         }
         if (match(IDENTIFIER)) {
                 return new VariableExpr(previous());
@@ -212,7 +212,6 @@ Expr* Parser::primary()
 		consume(RIGHT_PAREN, "expect ')' ");
     		return new Grouping(expr);
     	}
-
 	throw Parser_error(peek(), "expect expression.");
 }
 
@@ -424,7 +423,7 @@ Stmt* Parser::forStatement()
 Stmt* Parser::returnStmt()
 {
         Token name = previous();
-        Expr* value;
+        Expr* value = nullptr;
         if (!check(SEMICOLON)) {
                 value = expression();
         }
